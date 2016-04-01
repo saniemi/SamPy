@@ -1,6 +1,11 @@
 """
-Simple example comparing Random Forests to a Neural Network (MLP) in
-a binary classification problem.
+Binary Classification Example
+=============================
+
+A simple example comparing Random Forests to a Neural Network (MLP) using
+a fake binary classification data with 50 features. None of the models
+are optimised, they rather demonstrate the techniques than aim for an
+optimal performance.
 
 
 Dependencies
@@ -9,6 +14,7 @@ Dependencies
 :requires: matplotlib
 :requires: scikit-learn
 :requires: keras
+
 
 Author
 ------
@@ -29,13 +35,13 @@ from sklearn.datasets import make_classification
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation
+from keras.layers import Dense, Dropout
 from keras.optimizers import SGD, RMSprop
 from keras.callbacks import EarlyStopping
 import keras.utils.visualize_util
 
 
-def testNN(X_train, X_test, y_train, y_test, hiddenSize=256, nepochs=1000, dropouts=0.5):
+def testNN(X_train, X_test, y_train, y_test, hiddenSize=256, nepochs=1000, dropouts=0.25):
     """
     Train a Neural Network with dropouts and predict test data.
 
