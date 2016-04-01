@@ -32,7 +32,7 @@ import matplotlib.pyplot as plt
 from sklearn.cross_validation import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.datasets import make_classification
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from sklearn import metrics
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
@@ -131,22 +131,45 @@ def testRF(X_train, X_test, y_train, y_test):
     return yhat
 
 
-def plotAUC(yhatNN, yhatRF, y):
+def testET(X_train, X_test, y_train, y_test):
+    """
+    Train a extra-trees classifier and make predictions for test data.
+
+    :param X_train: training data
+    :param X_test: test data
+    :param y_train: training labels
+    :param y_test: test labels
+
+    :return: predictions for the test data
+    """
+    clf = ExtraTreesClassifier(n_estimators=1000, max_features=5, n_jobs=-1, verbose=False)
+    clf.fit(X_train, y_train)
+    yhat = clf.predict_proba(X_test)[:, 1]
+    auc = metrics.roc_auc_score(y_test, yhat)
+    print('ET AUC:', auc)
+
+    return yhat
+
+
+def plotAUC(yhatNN, yhatRF, yhatET, y):
     """
     Plot ROC curve. Compare Neural Net to Random Forests.
 
     :param yhatNN: Neural Net predictions
     :param yhatRF: Random Forest predictions
+    :param yhatET: Extra-Trees predictions
     :param y: target labels
 
     :return: None
     """
     fprNN, tprNN, thresholdsNN = metrics.roc_curve(y, yhatNN)
     fprRF, tprRF, thresholdsRF = metrics.roc_curve(y, yhatRF)
+    fprET, tprET, thresholdsET = metrics.roc_curve(y, yhatET)
 
     plt.figure()
     plt.plot(fprNN, tprNN, label='Neural Net')
     plt.plot(fprRF, tprRF, label='Random Forest')
+    plt.plot(fprET, tprET, label='Extra-Trees')
     plt.plot([0, 1], [0, 1], 'k--')
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
@@ -162,4 +185,5 @@ if __name__ == "__main__":
     X_train, X_test, y_train, y_test = createData()
     yhatNN = testNN(X_train, X_test, y_train, y_test)
     yhatRF = testRF(X_train, X_test, y_train, y_test)
-    plotAUC(yhatNN, yhatRF, y_test)
+    yhatET = testET(X_train, X_test, y_train, y_test)
+    plotAUC(yhatNN, yhatRF, yhatET, y_test)
