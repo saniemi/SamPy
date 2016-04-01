@@ -38,10 +38,11 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.optimizers import SGD, RMSprop
 from keras.callbacks import EarlyStopping
+from keras.regularizers import l2, activity_l2
 import keras.utils.visualize_util
 
 
-def testNN(X_train, X_test, y_train, y_test, hiddenSize=256, nepochs=1000, dropouts=0.25):
+def testNN(X_train, X_test, y_train, y_test, hiddenSize=256, nepochs=500, dropouts=0.25):
     """
     Train a Neural Network with dropouts and predict test data.
 
@@ -55,14 +56,20 @@ def testNN(X_train, X_test, y_train, y_test, hiddenSize=256, nepochs=1000, dropo
 
     :return: predictions for the test data
     """
-    # specify model - input, two middle layers, and output layer
+    # specify sequential model - input, two middle layers, and output layer
     model = Sequential()
-    model.add(Dense(hiddenSize, input_dim=X_train.shape[1], init='uniform', activation='relu'))
+
+    # input layer
+    model.add(Dense(hiddenSize, input_dim=X_train.shape[1], init='glorot_uniform', activation='relu'))
     model.add(Dropout(dropouts))
+
+    # hidden layers
     model.add(Dense(hiddenSize, activation='relu'))
     model.add(Dropout(dropouts))
     model.add(Dense(hiddenSize, activation='relu'))
     model.add(Dropout(dropouts))
+
+    # output layer
     model.add(Dense(1, activation='sigmoid'))
 
     # set the optimizer and compile
@@ -71,7 +78,7 @@ def testNN(X_train, X_test, y_train, y_test, hiddenSize=256, nepochs=1000, dropo
     model.compile(loss='binary_crossentropy', optimizer=opt)
 
     # fit the model using training data
-    model.fit(X_train, y_train, nb_epoch=nepochs, batch_size=2048,
+    model.fit(X_train, y_train, nb_epoch=nepochs, batch_size=8192,
               validation_split=0.1, show_accuracy=True, verbose=1,
               callbacks=[EarlyStopping(monitor='val_loss', patience=10)])
     print('Training completed...')
