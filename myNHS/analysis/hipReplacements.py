@@ -29,7 +29,10 @@ from sqlalchemy import create_engine
 import bokeh.plotting as bk
 from bokeh.models import GMapPlot, Range1d, GMapOptions, ColumnDataSource, Circle
 from bokeh.models import PanTool, BoxZoomTool, WheelZoomTool, HoverTool
-
+from bokeh.layouts import row
+from bokeh.charts import Bar
+from bokeh.plotting import figure
+from bokeh.models.ranges import FactorRange
 
 
 def QueryDB(sql, location='sqlite:////Users/saminiemi/Projects/myNHS/data/myNHS.db'):
@@ -73,7 +76,7 @@ def createMap(data):
 
     # create figure
     bk.output_file("HipReplacementMap.html", mode="cdn")
-    fig = GMapPlot(plot_width=800, plot_height=800, logo=None,
+    fig = GMapPlot(plot_width=600, plot_height=1000, logo=None,
                  x_range=Range1d(), y_range=Range1d(),
                  map_options=GMapOptions(lat=53.4808, lng=-1.2426, zoom=7),
                  api_key='AIzaSyBQH3HGn6tpIrGxekGGRAVh-hISYAPsM78')
@@ -93,8 +96,11 @@ def createMap(data):
                     fill_color="blue", fill_alpha=0.8, line_color=None)
     fig.add_glyph(source, circle)
 
+    barchart = Bar(data, 'OrganisationName', values='Value', responsive=True, legend=False,
+                   xlabel=None, ylabel=None)
+
     # show the map
-    bk.show(fig)
+    bk.show(row(fig, barchart))
 
 
 def run():
@@ -111,8 +117,16 @@ def run():
     b.metricID = c.metricID and
     b.metricID = 9225 and
     b.isCurrent = 1'''
+
     data = QueryDB(sql)
+
+    data['Value'] = pd.to_numeric(data['Value'], errors='coerce')
+    data['Value'].fillna(value=0, inplace=True)
+
+    data.sort(columns='Value', ascending=False, inplace=True)
+
     print(data.info())
+
     createMap(data)
 
 
