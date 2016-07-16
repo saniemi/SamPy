@@ -15,8 +15,8 @@ def index():
 @app.route("/myNHS/hipReplacements")
 def hipReplacements():
     sql = '''select
-    a.OrganisationName, a.Latitude, a.Longitude,
-    b.value,
+    a.OrganisationName, a.Latitude, a.Longitude, a.OrganisationTypeID, a.isPimsManaged,
+    b.value, isCurrentLastModified,
     c.metricName
     from
     organisation as a,
@@ -25,14 +25,14 @@ def hipReplacements():
     where
     a.organisationID = b.organisationID and
     b.metricID = c.metricID and
-    b.metricID = 9225 and
-    b.isCurrent = 1'''
+    b.metricID = 9225'''
 
     data = nhs.QueryDB(sql)
     data['Value'] = pd.to_numeric(data['Value'], errors='coerce')
     data['Value'].fillna(value=0, inplace=True)
 
     print(data.info())
+    print(data.head(4))
 
     data = data.to_json(orient='records')
 
