@@ -18,16 +18,16 @@ function makeGraphs(error, projectsJson) {
 	console.log("Total Data:" + n)
 
 	// Define Dimensions
-	var Latitude = ndx.dimension(function(d) { return d.Latitude; });
-	var Longitude = ndx.dimension(function(d) { return d.Longitude; });
+	//var Latitude = ndx.dimension(function(d) { return d.Latitude; });
+	//var Longitude = ndx.dimension(function(d) { return d.Longitude; });
 	var OrganisationNameDim = ndx.dimension(function(d) { return d.OrganisationName; });
-	var MetricNameDim = ndx.dimension(function(d) { return d.MetricName; });
-	var ValueDim = ndx.dimension(function(d) { return +d.Value; });
+	//var MetricNameDim = ndx.dimension(function(d) { return d.MetricName; });
+	//var ValueDim = ndx.dimension(function(d) { return +d.Value; });
 
     // Set up Groups
-	var ValueGroup = ValueDim.group()
+	//var ValueGroup = ValueDim.group()
 	var OrganisationNameGroup = OrganisationNameDim.group()
-	var MetricNameGroup = MetricNameDim.group()
+	//var MetricNameGroup = MetricNameDim.group()
 
     // Compute Total Hips
 	var TotalHips = OrganisationNameGroup.reduceSum(function(d) {return d.Value;})
