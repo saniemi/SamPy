@@ -15,6 +15,8 @@ function makeGraphs(error, projectsJson) {
 	//Modify
     hipReplacements.forEach(function(d) {
         d.date = dateFormat.parse(d.IsCurrentLastModified);
+        //d.Probability = Math.round(+d.Probability * 50) / 50;
+        d.Views = +d.Views;
         d.IsPimsManaged = +d.IsPimsManaged;
         d.year = +yearFormat(d.date);
     });
@@ -30,6 +32,8 @@ function makeGraphs(error, projectsJson) {
 	var OrganisationTypeIDDim = ndx.dimension(function(d) { return d.OrganisationTypeID; });
 	var isPimsManagedDim = ndx.dimension(function(d) { return d.IsPimsManaged; });
 	var yearDim  = ndx.dimension(function(d) {return d.year;})
+    var viewsDim = ndx.dimension(function(d) { return d.Views; });
+    //var probabilityDim = ndx.dimension(function(d) { return d.Probability; });
 
     // Set up Groups
 	var OrganisationNameGroup = OrganisationNameDim.group();
@@ -41,7 +45,8 @@ function makeGraphs(error, projectsJson) {
 	var TypeCount = OrganisationTypeIDGroup.reduceCount();
 	var PimsCount = isPimsManagedGroup.reduceCount();
 	var countPerYear = yearDim.group().reduceCount();
-	console.log(PimsCount.top(3));
+    var viewCount = viewsDim.group().reduceSum(function(d) {return d.Views;});
+    //var probabilityCount = probabilityDim.group().reduceSum(function(d) {return d.Probability;});
 
     //Charts
 	var Chart = dc.rowChart("#row-chart");
@@ -50,6 +55,8 @@ function makeGraphs(error, projectsJson) {
     var typeChart = dc.pieChart('#chart-type');
     var pimsChart = dc.pieChart('#chart-pims');
     var yearChart = dc.pieChart('#chart-year');
+    var viewChart = dc.barChart('#chart-views');
+    //var probabilityChart = dc.barChart('#chart-prob');
     // Table
 	var dataTable = dc.dataTable("#data-table");
 
@@ -76,6 +83,33 @@ function makeGraphs(error, projectsJson) {
         .group(TypeCount)
         .innerRadius(20)
         .colors(d3.scale.ordinal().range([ '#1f78b4', '#b2df8a', '#cab2d6', '#bc80bd']));
+
+    viewChart
+        .width(680)
+        .height(180)
+        .dimension(viewsDim)
+        .group(viewCount)
+        .x(d3.scale.linear().domain([0.0, d3.max(hipReplacements, function (d) { return d.Views; }) + 1]))
+        .elasticY(true)
+        .elasticX(true)
+        .centerBar(true)
+        .barPadding(1)
+        .yAxisLabel('Number of Views')
+        .margins({top: 5, right: 20, bottom: 40, left: 80})
+        .xAxis().tickFormat(function(v) { return ""; });
+
+//    probabilityChart
+//        .width(300)
+//        .height(180)
+//        .dimension(probabilityDim)
+//        .group(probabilityCount)
+//        .x(d3.scale.linear().domain([0.0, 1.0]))
+//        .elasticY(true)
+//        .centerBar(true)
+//        .barPadding(1)
+//        .xAxisLabel('')
+//        .yAxisLabel('Probability')
+//        .margins({top: 10, right: 20, bottom: 50, left: 50});
 
     yearChart
         .width(150)
@@ -132,9 +166,12 @@ function makeGraphs(error, projectsJson) {
       Markers.clearLayers();
       _.each(allDim.top(Infinity), function (d) {
         var name = d.OrganisationName;
-        var value = d.Value;
+        var a1 = d.Address1;
+        var a2 = d.Address2;
+        var a3 = d.Address3;
+        var postcode = d.Postcode;
         var marker = L.marker([d.Latitude, d.Longitude]);
-        marker.bindPopup("<p>" + name +  " " + value + "</p>");
+        marker.bindPopup("<p>" + name +  "<br>" + a1 + "<br>" + a2 + "<br>" + a3 + "<br>" + postcode + "</p>");
         Markers.addLayer(marker);
       });
       map.addLayer(Markers);
@@ -166,6 +203,16 @@ function makeGraphs(error, projectsJson) {
         Chart.filterAll();
         dc.redrawAll();
   });
+
+  d3.selectAll('a#page').on('click', function () {
+        viewChart.filterAll();
+        dc.redrawAll();
+  });
+
+//  d3.selectAll('a#prob').on('click', function () {
+//        probabilityChart.filterAll();
+//        dc.redrawAll();
+//  });
 
 
     dc.renderAll();
