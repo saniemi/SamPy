@@ -46,6 +46,15 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/hipReplacement.html")
+def hips():
+    """
+
+    :return:
+    """
+    return render_template("hipReplacement.html")
+
+
 @app.route("/myNHS/hipReplacements")
 def hipReplacements():
     """
