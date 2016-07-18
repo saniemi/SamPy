@@ -61,7 +61,7 @@ div.dc-chart {
 }
 
 .dc-chart .selected path {
-    stroke-width: 3;
+    stroke-width: 0;
     stroke: #ccc;
     fill-opacity: 1;
 }

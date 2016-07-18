@@ -1,5 +1,29 @@
 """
+myNHS Dashboard Backend
+-----------------------
 
+A simple backend to provide data for the myNHS example Dashboard.
+
+
+Requirements
+------------
+
+:requires: Flask
+:requires: pandas
+:requires: numpy
+
+
+Author
+------
+
+:author: Sami Niemi (sami.niemi@valtech.co.uk)
+
+
+Version
+-------
+
+:version: 0.1
+:date: 18-Jul-2016
 """
 from flask import Flask
 from flask import render_template
@@ -43,16 +67,19 @@ def hipReplacements():
     b.metricID = 9225'''
 
     data = nhs.QueryDB(sql)
+
+    # chagen values to numeric
     data['Value'] = pd.to_numeric(data['Value'], errors='coerce')
     data['Value'].fillna(value=0, inplace=True)
 
-    #print(data.info())
+    # change pims to "yes" and "no"
+    data.replace(to_replace={'IsPimsManaged': {0: 'No', 1: 'Yes'}}, inplace=True)
 
     # add some fake data
     rows = len(data.index)
     data['Views'] = np.random.randint(1000, 20000, size=rows)
-    #data['Probability'] = np.random.exponential(0.3, size=rows)
-    #data['Probability'][data['Probability'] > 1.] = 1.
+    data['Probability'] = np.random.randint(1, 4, size=rows)
+    data.replace(to_replace={'Probability': {1: 'Low', 2: 'Moderate', 3: 'High'}}, inplace=True)
 
     data = data.to_json(orient='records')
 
