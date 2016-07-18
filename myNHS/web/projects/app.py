@@ -55,6 +55,15 @@ def hips():
     return render_template("hipReplacement.html")
 
 
+@app.route("/organisationFinder.html")
+def finder():
+    """
+
+    :return:
+    """
+    return render_template("organisationFinder.html")
+
+
 @app.route("/myNHS/hipReplacements")
 def hipReplacements():
     """
