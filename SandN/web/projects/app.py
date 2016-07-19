@@ -78,7 +78,7 @@ def hipReplacements():
 
     data = nhs.QueryDB(sql)
 
-    # chagen values to numeric
+    # change values to numeric
     data['Value'] = pd.to_numeric(data['Value'], errors='coerce')
     data['Value'].fillna(value=0, inplace=True)
 

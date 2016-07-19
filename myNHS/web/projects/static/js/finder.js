@@ -59,7 +59,7 @@ function makeGraphs(error, projectsJson) {
       // update map to match filtered data
       Markers.clearLayers();
 
-      _.each(allDim.top(Infinity), function (d) {
+      _.each(allDim.top(5000), function (d) {
         var name = d.OrganisationName;
         var a1 = d.Address1;
         var a2 = d.Address2;

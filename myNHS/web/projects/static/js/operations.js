@@ -1,68 +1,62 @@
-// Hip Replacement Graphs
-
+// Treatment Graphs
 
 queue()
-    .defer(d3.json, "/myNHS/hipReplacements")
+    .defer(d3.json, "/myNHS/operationsData")
     .await(makeGraphs);
 
 
 function makeGraphs(error, projectsJson) {
 	//Set Data Formatters
 	var dateFormat = d3.time.format("%Y-%m-%d");
-	var yearFormat = d3.time.format('%Y');
-//	var dateFormat = d3.timeFormat("%Y-%m-%d");
-//	var yearFormat = d3.timeFormat('%Y');
-
 
 	//Get projectsJson data
-	var hipReplacements = projectsJson;
-	console.log(hipReplacements)
+	var data = projectsJson;
 
 	//Modify
-    hipReplacements.forEach(function(d) {
+    data.forEach(function(d) {
         d.date = dateFormat.parse(d.IsCurrentLastModified);
-        d.Views = +d.Views;
-        d.year = +yearFormat(d.date);
     });
 
     //Create a Crossfilter instance
-	var ndx = crossfilter(hipReplacements);
+	var ndx = crossfilter(data);
 	var all = ndx.groupAll();
-	//console.log("All Reduced Count:" + all.reduceCount().value())
 
 	// Define Dimensions
 	var allDim = ndx.dimension(function(d) {return d;});
 	var OrganisationNameDim = ndx.dimension(function(d) { return d.OrganisationName; });
 	var OrganisationTypeIDDim = ndx.dimension(function(d) { return d.OrganisationTypeID; });
-	var isPimsManagedDim = ndx.dimension(function(d) { return d.IsPimsManaged; });
-	var yearDim  = ndx.dimension(function(d) {return d.year;})
-    var viewsDim = ndx.dimension(function(d) { return d.Views; });
-    var probabilityDim = ndx.dimension(function(d) { return d.Probability; });
+	var ValueDim = ndx.dimension(function(d) { return d.Value; });
+	var DateDim = ndx.dimension(function(d) { return d.date; });
+	var TreatmentDim  = ndx.dimension(function(d) {return d.TreatmentID;})
+	var TreatmentNameDim  = ndx.dimension(function(d) {return d.TreatmentName;})
 
     // Set up Groups
 	var OrganisationNameGroup = OrganisationNameDim.group();
 	var OrganisationTypeIDGroup = OrganisationTypeIDDim.group();
-	var isPimsManagedGroup = isPimsManagedDim.group();
+	var TreatmentGroup = TreatmentDim.group();
+	var TreatmentNameGroup = TreatmentNameDim.group();
+	var DateGroup = DateDim.group();
 
     // Compute sums and counts
-	var TotalHips = OrganisationNameGroup.reduceSum(function(d) {return d.Value;});
+	var Total = OrganisationNameGroup.reduceSum(function(d) {return d.Value;});
 	var TypeCount = OrganisationTypeIDGroup.reduceCount();
-	var PimsCount = isPimsManagedGroup.reduceCount();
-	var countPerYear = yearDim.group().reduceCount();
-    var viewCount = viewsDim.group().reduceSum(function(d) {return d.Views;});
-    var probabilityCount = probabilityDim.group().reduceCount();
+	var TreatmentCount = TreatmentGroup.reduceCount();
+	var countPerDate = DateGroup.reduceSum(function(d) {return d.Value;});
 
     //Charts
 	var Chart = dc.rowChart("#row-chart");
 	var number = dc.numberDisplay("#number");
-    var dataCount = dc.dataCount('#data-count');
     var typeChart = dc.pieChart('#chart-type');
-    var pimsChart = dc.pieChart('#chart-pims');
-    var yearChart = dc.pieChart('#chart-year');
-    var viewChart = dc.barChart('#chart-views');
-    var probabilityChart = dc.pieChart('#chart-prob');
+    var yearChart = dc.bubbleChart('#chart-year');
     // Table
 	var dataTable = dc.dataTable("#data-table");
+
+    // A dropdown widget
+    var selectField = dc.selectMenu('#menuselect');
+    selectField
+        .dimension(TreatmentNameDim)
+        .group(TreatmentNameGroup.reduceCount());
+
 
     /* instantiate and configure map */
     L.mapbox.accessToken = 'pk.eyJ1Ijoic25pZW1pIiwiYSI6ImNpcW85ejZwbjAwNWNpMm5rejJuMzN1Z2cifQ.8FblzFWMjmRLfwrW5ZyvUg';
@@ -76,65 +70,53 @@ function makeGraphs(error, projectsJson) {
       accessToken: 'pk.eyJ1Ijoic25pZW1pIiwiYSI6ImNpcW85ejZwbjAwNWNpMm5rejJuMzN1Z2cifQ.8FblzFWMjmRLfwrW5ZyvUg',
     } ).addTo(map);
 
-    dataCount
-         .dimension(ndx)
-         .group(all);
-
     typeChart
-        .width(150)
-        .height(150)
+        .width(160)
+        .height(160)
         .dimension(OrganisationTypeIDDim)
         .group(TypeCount)
-        .innerRadius(25);
-//        .colors(d3.scale.ordinal().range([ '#1f78b4', '#b2df8a', '#cab2d6', '#bc80bd']));
-
-    probabilityChart
-        .width(150)
-        .height(150)
-        .dimension(probabilityDim)
-        .group(probabilityCount)
-        .innerRadius(25);
+        .transitionDuration(1500)
+        .colors(d3.scale.category10())
+        .innerRadius(30);
 
     yearChart
-        .width(150)
-        .height(150)
-        .dimension(yearDim)
-        .group(countPerYear)
-        .innerRadius(25)
-        .renderLabel(true);
-
-    pimsChart
-        .width(150)
-        .height(150)
-        .dimension(isPimsManagedDim)
-        .group(PimsCount)
-        .innerRadius(25);
-
-    viewChart
-        .width(400)
-        .height(180)
-        .dimension(viewsDim)
-        .group(viewCount)
-        .x(d3.scale.linear().domain([-0.0, d3.max(viewCount, function (d) { return d.Views; }) + 1]))
-//        .x(d3.scaleLinear().domain([-0.0, d3.max(viewCount, function (d) { return d.Views; }) + 1]))
-        .elasticY(true)
+        .width(670)
+        .height(200)
+        .margins({ top: 5, right: 10, bottom: 30, left: 80 })
+        .dimension(DateDim)
+        .group(countPerDate)
+        .x(d3.time.scale().domain(d3.extent(data, function(d) { return d.date; })).nice())
+        .y(d3.scale.linear().domain([0, d3.max(countPerDate, function(d) { return d.Value; })+10]))
+        .r(d3.scale.linear())
+        .radiusValueAccessor(function (p) {
+                        return 1;
+                    })
         .elasticX(true)
-        .barPadding(1)
-        .yAxisLabel('Number of Views')
-        .margins({top: 5, right: 20, bottom: 40, left: 80})
-        .xAxis().tickFormat(function(v) { return ""; });
+        .elasticY(true)
+        .elasticRadius(true)
+        .renderLabel(false)
+        .renderHorizontalGridLines(true)
+        .renderVerticalGridLines(true)
+        .transitionDuration(1500)
+        .yAxisPadding(5000)
+        .renderlet(function(chart) {chart.svg().selectAll('.chart-body').attr('clip-path', null)})
+        .xAxisPadding(2)
+        .xUnits(d3.time.days)
+        .maxBubbleRelativeSize(2)
+        .xAxis().ticks(5);
 
 	Chart
         .width(700)
-        .height(2400)
-        .gap(1)
+        .height(550)
+        .gap(2)
         .dimension(OrganisationNameDim)
-        .group(TotalHips)
+        .group(Total)
         .elasticX(true)
         .ordering(function(d) { return -d.value })
         .label(function (d) { return d.key })
         .title(function (d) { return d.value })
-        .renderTitleLabel(true);
+        .renderTitleLabel(true)
+        .rowsCap(30);
 
 	number
         .formatNumber(d3.format("d"))
@@ -144,15 +126,14 @@ function makeGraphs(error, projectsJson) {
     dataTable
     .dimension(allDim)
     .group(function (d) { return 'dc.js insists on putting a row here so I remove it using JS'; })
-    .size(100)
+    .size(30)
     .columns([
       function (d) { return d.OrganisationName; },
       function (d) { return d.OrganisationTypeID; },
-      function (d) { return d.IsPimsManaged; },
-      function (d) { return d.year; },
-      function (d) { return d.Views; },
+      function (d) { return d.date; },
       function (d) { return d.Value; },
-      function (d) { return d.MetricName; }
+      function (d) { return d.TreatmentID; },
+      function (d) { return d.TreatmentName; }
     ])
     .sortBy(dc.pluck('Value'))
     .order(d3.descending)
@@ -162,7 +143,7 @@ function makeGraphs(error, projectsJson) {
 
       // update map to match filtered data
       Markers.clearLayers();
-      _.each(allDim.top(Infinity), function (d) {
+      _.each(allDim.top(5000), function (d) {
         var name = d.OrganisationName;
         var a1 = d.Address1;
         var a2 = d.Address2;
@@ -171,7 +152,7 @@ function makeGraphs(error, projectsJson) {
 
         var marker = L.circleMarker([d.Latitude, d.Longitude]);
         marker.bindPopup("<p>" + name +  "<br>" + a1 + "<br>" + a2 + "<br>" + a3 + "<br>" + postcode + "</p>");
-        marker.setRadius(d.Value / 50)
+        marker.setRadius(Math.max(2, Math.min(d.Value / 50, 30)));
 
         Markers.addLayer(marker);
       });
@@ -190,11 +171,6 @@ function makeGraphs(error, projectsJson) {
         dc.redrawAll();
   });
 
-  d3.selectAll('a#pims').on('click', function () {
-        pimsChart.filterAll();
-        dc.redrawAll();
-  });
-
   d3.selectAll('a#type').on('click', function () {
         typeChart.filterAll();
         dc.redrawAll();
@@ -205,15 +181,6 @@ function makeGraphs(error, projectsJson) {
         dc.redrawAll();
   });
 
-  d3.selectAll('a#page').on('click', function () {
-        viewChart.filterAll();
-        dc.redrawAll();
-  });
-
-  d3.selectAll('a#prob').on('click', function () {
-        probabilityChart.filterAll();
-        dc.redrawAll();
-  });
 
     dc.renderAll();
 
