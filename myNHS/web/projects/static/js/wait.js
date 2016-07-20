@@ -1,13 +1,13 @@
-// Treatment Graphs
+// Wait Time Graphs
 
 queue()
-    .defer(d3.json, "/myNHS/operationsData")
+    .defer(d3.json, "/myNHS/waitTimeData")
     .await(makeGraphs);
-
 
 function makeGraphs(error, projectsJson) {
 	//Set Data Formatters
 	var dateFormat = d3.time.format("%Y-%m-%d");
+	var monthFormat = d3.time.format("%m")
 
 	//Get projectsJson data
 	var data = projectsJson;
@@ -15,42 +15,42 @@ function makeGraphs(error, projectsJson) {
 	//Modify
     data.forEach(function(d) {
         d.date = dateFormat.parse(d.IsCurrentLastModified);
+        d.month = +monthFormat(d.date);
     });
 
     //Create a Crossfilter instance
 	var ndx = crossfilter(data);
+	var all = ndx.groupAll();
 
 	// Define Dimensions
 	var allDim = ndx.dimension(function(d) {return d;});
 	var OrganisationNameDim = ndx.dimension(function(d) { return d.OrganisationName; });
 	var OrganisationTypeIDDim = ndx.dimension(function(d) { return d.OrganisationTypeID; });
-	var DateDim = ndx.dimension(function(d) { return d.date; });
-	var TreatmentNameDim  = ndx.dimension(function(d) {return d.TreatmentName;})
+	var isPimsManagedDim = ndx.dimension(function(d) { return d.IsPimsManaged; });
+	var monthDim  = ndx.dimension(function(d) {return d.month;})
+	var serviceNameDim = ndx.dimension(function(d) {return d.ServiceName;})
 
     // Set up Groups
 	var OrganisationNameGroup = OrganisationNameDim.group();
 	var OrganisationTypeIDGroup = OrganisationTypeIDDim.group();
-	var TreatmentNameGroup = TreatmentNameDim.group();
-	var DateGroup = DateDim.group();
+	var isPimsManagedGroup = isPimsManagedDim.group();
+	var serviceNameGroup = serviceNameDim.group();
 
     // Compute sums and counts
 	var Total = OrganisationNameGroup.reduceSum(function(d) {return d.Value;});
 	var TypeCount = OrganisationTypeIDGroup.reduceCount();
-	var countPerDate = DateGroup.reduceSum(function(d) {return d.Value;});
+	var PimsCount = isPimsManagedGroup.reduceCount();
+	var countPerMonth = monthDim.group().reduceCount();
+	var serviceNameCount = serviceNameGroup.reduceCount();
 
     //Charts
 	var Chart = dc.rowChart("#row-chart");
     var typeChart = dc.pieChart('#chart-type');
-    var yearChart = dc.bubbleChart('#chart-year');
+    var pimsChart = dc.pieChart('#chart-pims');
+    var yearChart = dc.pieChart('#chart-year');
+    var ServiceChart = dc.rowChart('#chart-service');
     // Table
 	var dataTable = dc.dataTable("#data-table");
-
-    // A dropdown widget
-    var selectField = dc.selectMenu('#menuselect');
-    selectField
-        .dimension(TreatmentNameDim)
-        .group(TreatmentNameGroup.reduceCount());
-
 
     /* instantiate and configure map */
     L.mapbox.accessToken = 'pk.eyJ1Ijoic25pZW1pIiwiYSI6ImNpcW85ejZwbjAwNWNpMm5rejJuMzN1Z2cifQ.8FblzFWMjmRLfwrW5ZyvUg';
@@ -65,39 +65,38 @@ function makeGraphs(error, projectsJson) {
     } ).addTo(map);
 
     typeChart
-        .width(160)
-        .height(160)
+        .width(200)
+        .height(200)
         .dimension(OrganisationTypeIDDim)
         .group(TypeCount)
-        .transitionDuration(1500)
-        .colors(d3.scale.category10())
-        .innerRadius(30);
+        .innerRadius(50);
+
+    ServiceChart
+        .width(600)
+        .height(310)
+        .gap(2)
+        .dimension(serviceNameDim)
+        .group(serviceNameCount)
+        .elasticX(true)
+        .ordering(function(d) { return -d.value })
+        .label(function (d) { return d.key })
+        .title(function (d) { return d.value })
+        .renderTitleLabel(true);
 
     yearChart
-        .width(670)
+        .width(200)
         .height(200)
-        .margins({ top: 5, right: 10, bottom: 30, left: 80 })
-        .dimension(DateDim)
-        .group(countPerDate)
-        .x(d3.time.scale().domain(d3.extent(data, function(d) { return d.date; })).nice())
-        .y(d3.scale.linear().domain([0, d3.max(countPerDate, function(d) { return d.Value; })+10]))
-        .r(d3.scale.linear())
-        .radiusValueAccessor(function (p) {
-                        return 1;
-                    })
-        .elasticX(true)
-        .elasticY(true)
-        .elasticRadius(true)
-        .renderLabel(false)
-        .renderHorizontalGridLines(true)
-        .renderVerticalGridLines(true)
-        .transitionDuration(1500)
-        .yAxisPadding(5000)
-        .renderlet(function(chart) {chart.svg().selectAll('.chart-body').attr('clip-path', null)})
-        .xAxisPadding(2)
-        .xUnits(d3.time.days)
-        .maxBubbleRelativeSize(2)
-        .xAxis().ticks(5);
+        .dimension(monthDim)
+        .group(countPerMonth)
+        .innerRadius(50)
+        .renderLabel(true);
+
+    pimsChart
+        .width(200)
+        .height(200)
+        .dimension(isPimsManagedDim)
+        .group(PimsCount)
+        .innerRadius(50);
 
 	Chart
         .width(700)
@@ -115,17 +114,17 @@ function makeGraphs(error, projectsJson) {
     dataTable
     .dimension(allDim)
     .group(function (d) { return 'dc.js insists on putting a row here so I remove it using JS'; })
+    .size(50)
     .columns([
       function (d) { return d.OrganisationName; },
       function (d) { return d.OrganisationTypeID; },
-      function (d) { return d.date; },
-      function (d) { return d.Value; },
-      function (d) { return d.TreatmentID; },
-      function (d) { return d.TreatmentName; }
+      function (d) { return d.IsPimsManaged; },
+      function (d) { return d.month; },
+      function (d) { return d.ServiceName; },
+      function (d) { return d.Value; }
     ])
     .sortBy(dc.pluck('Value'))
-    .order(d3.descending)
-    .size(30)
+    .order(d3.ascending)
     .on('renderlet', function (table) {
       // each time table is rendered remove nasty extra row dc.js insists on adding
       table.select('tr.dc-table-group').remove();
@@ -142,7 +141,7 @@ function makeGraphs(error, projectsJson) {
         var marker = L.circleMarker([d.Latitude, d.Longitude]);
         marker.bindPopup("<p><strong>Name:</strong><br>" + name +  "<br><strong>Address:</strong><br>" + a1 +
                          "<br>" + a2 + "<br>" + a3 + "<br>" + postcode + "</p>");
-        marker.setRadius(Math.max(2, Math.min(d.Value / 50, 20)));
+        marker.setRadius(d.Value)
 
         Markers.addLayer(marker);
       });
@@ -161,6 +160,11 @@ function makeGraphs(error, projectsJson) {
         dc.redrawAll();
   });
 
+  d3.selectAll('a#pims').on('click', function () {
+        pimsChart.filterAll();
+        dc.redrawAll();
+  });
+
   d3.selectAll('a#type').on('click', function () {
         typeChart.filterAll();
         dc.redrawAll();
@@ -171,6 +175,10 @@ function makeGraphs(error, projectsJson) {
         dc.redrawAll();
   });
 
+  d3.selectAll('a#service').on('click', function () {
+        ServiceChart.filterAll();
+        dc.redrawAll();
+  });
 
     dc.renderAll();
 

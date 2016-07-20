@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e62e779c-d161-4edd-baed-0f88892a915e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/analysis/hipReplacements.py" afterPath="$PROJECT_DIR$/myNHS/analysis/hipReplacements.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/myNHS/web/projects/static/js/wait.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/myNHS/web/projects/templates/waitTime.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/app.py" afterPath="$PROJECT_DIR$/myNHS/web/projects/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js" afterPath="$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" afterPath="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/templates/index.html" afterPath="$PROJECT_DIR$/myNHS/web/projects/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/templates/operations.html" afterPath="$PROJECT_DIR$/myNHS/web/projects/templates/operations.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html" afterPath="$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html" />
     </list>
     <ignored path="SamPy.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,11 +30,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/myNHS/web/projects/app.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="397">
+              <caret line="150" column="19" selection-start-line="150" selection-start-column="19" selection-end-line="150" selection-end-column="19" />
+              <folding>
+                <element signature="e#303#322#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+            <state relative-caret-position="300">
+              <caret line="25" column="24" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="24" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -41,8 +57,8 @@
       <file leaf-file-name="organisationFinder.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="48" column="0" selection-start-line="44" selection-start-column="1" selection-end-line="48" selection-end-column="0" />
+            <state relative-caret-position="555">
+              <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -53,30 +69,28 @@
       <file leaf-file-name="operations.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/operations.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="54" column="24" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
+            <state relative-caret-position="300">
+              <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myNHS/web/projects/app.py">
+      <file leaf-file-name="waitTime.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/waitTime.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1042">
-              <caret line="114" column="21" selection-start-line="114" selection-start-column="21" selection-end-line="114" selection-end-column="21" />
-              <folding>
-                <element signature="e#303#322#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="283">
+              <caret line="99" column="32" selection-start-line="99" selection-start-column="32" selection-end-line="99" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="operations.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js">
+      <file leaf-file-name="wait.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/wait.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state relative-caret-position="1440">
+              <caret line="98" column="23" selection-start-line="98" selection-start-column="23" selection-end-line="98" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -133,14 +147,16 @@
         <option value="$PROJECT_DIR$/SandN/web/projects/templates/index.html" />
         <option value="$PROJECT_DIR$/SandN/web/projects/templates/hipReplacement.html" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/treatement.js" />
-        <option value="$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html" />
-        <option value="$PROJECT_DIR$/myNHS/web/projects/templates/index.html" />
         <option value="$PROJECT_DIR$/SandN/web/projects/app.py" />
-        <option value="$PROJECT_DIR$/myNHS/web/projects/templates/operations.html" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js" />
         <option value="$PROJECT_DIR$/myNHS/analysis/hipReplacements.py" />
-        <option value="$PROJECT_DIR$/myNHS/web/projects/app.py" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" />
+        <option value="$PROJECT_DIR$/myNHS/web/projects/templates/index.html" />
+        <option value="$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html" />
+        <option value="$PROJECT_DIR$/myNHS/web/projects/templates/operations.html" />
+        <option value="$PROJECT_DIR$/myNHS/web/projects/app.py" />
+        <option value="$PROJECT_DIR$/myNHS/web/projects/templates/waitTime.html" />
+        <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/wait.js" />
       </list>
     </option>
   </component>
@@ -176,56 +192,7 @@
     </navigator>
     <panes>
       <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SamPy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SamPy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SamPy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SamPy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SamPy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myNHS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SamPy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SamPy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myNHS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="analysis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane />
       </pane>
       <pane id="Scope" />
       <pane id="Scratches" />
@@ -238,8 +205,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/myNHS/web/projects/templates" />
       <recent name="$PROJECT_DIR$/myNHS/web/projects/static/js" />
+      <recent name="$PROJECT_DIR$/myNHS/web/projects/templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/myNHS/data" />
@@ -577,26 +544,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sandbox/exampleWeb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="85" column="19" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
-          <folding>
-            <element signature="e#75#88#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sandbox/sparkDistributedML.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#32#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sandbox/sparkDistributedRF.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -931,52 +878,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="103" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SandN/web/projects/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="80" column="12" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="48" column="0" selection-start-line="44" selection-start-column="1" selection-end-line="48" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SandN/web/projects/static/js/graphs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="118" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/operations.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="54" column="24" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -986,7 +887,7 @@
         <state relative-caret-position="495">
           <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <element signature="e#274#293#0" expanded="true" />
+            <element signature="e#274#293#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -994,25 +895,85 @@
     <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="427">
-          <caret line="74" column="26" selection-start-line="74" selection-start-column="26" selection-end-line="74" selection-end-column="26" />
+          <caret line="74" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="25" column="24" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="24" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/operations.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SandN/web/projects/static/js/graphs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SandN/web/projects/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="86" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="112" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/myNHS/web/projects/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1042">
-          <caret line="114" column="21" selection-start-line="114" selection-start-column="21" selection-end-line="114" selection-end-column="21" />
+        <state relative-caret-position="397">
+          <caret line="150" column="19" selection-start-line="150" selection-start-column="19" selection-end-line="150" selection-end-column="19" />
           <folding>
             <element signature="e#303#322#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js">
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/waitTime.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        <state relative-caret-position="283">
+          <caret line="99" column="32" selection-start-line="99" selection-start-column="32" selection-end-line="99" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/wait.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="98" column="23" selection-start-line="98" selection-start-column="23" selection-end-line="98" selection-end-column="23" />
           <folding />
         </state>
       </provider>

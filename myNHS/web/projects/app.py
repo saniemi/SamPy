@@ -60,6 +60,15 @@ def operations():
     return render_template("operations.html")
 
 
+@app.route("/waitTime.html")
+def waiting():
+    """
+
+    :return:
+    """
+    return render_template("waitTime.html")
+
+
 @app.route("/myNHS/finderData")
 def finderData():
     sql = '''select
@@ -111,6 +120,44 @@ def operationsData():
     # change values to numeric
     data['Value'] = pd.to_numeric(data['Value'], errors='coerce')
     data['Value'].fillna(value=0, inplace=True)
+
+    # convert to JSON
+    data = data.to_json(orient='records')
+
+    return data
+
+
+@app.route("/myNHS/waitTimeData")
+def waitTimeData():
+    sql = '''select
+    a.OrganisationName, a.OrganisationTypeID, a.Latitude, a.Longitude, a.Address1, a.Address2, a.Address3, a.postcode,
+    a.isPimsManaged,
+    b.value, b.text, b.isCurrentLastModified,
+    c.DisplayName,
+	e.ServiceName
+    from
+    organisation as a,
+    indicator as b,
+    metric as c,
+	indicatorservice as d,
+	service as e
+    where
+    a.Latitude != "" and a.Longitude != "" and a.OrganisationName != "" and
+	c.isDeleted = 0 and a.OrganisationStatusID = 1 and
+    a.organisationID = b.organisationID and
+	b.indicatorID = d.indicatorID and
+	d.serviceID = e.serviceID and
+    b.metricID = c.metricID and
+    b.metricID = 64'''
+
+    data = nhs.QueryDB(sql)
+
+    # change values to numeric
+    data['Value'] = pd.to_numeric(data['Value'], errors='coerce')
+    data['Value'].fillna(value=0, inplace=True)
+
+    # change pims to "yes" and "no"
+    data.replace(to_replace={'IsPimsManaged': {0: 'No', 1: 'Yes'}}, inplace=True)
 
     # convert to JSON
     data = data.to_json(orient='records')

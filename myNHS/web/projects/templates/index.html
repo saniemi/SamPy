@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>myNHS Dashboard</title>
   <meta charset="UTF-8">
 
@@ -21,11 +21,21 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="/"><img style="max-width:200px; margin-top: -7px;" src="/static/figs/choices-logo.gif"></a>
     </div>
+
     <ul class="nav navbar-nav">
       <li class="active"><a href="/">Home</a></li>
       <li><a href="organisationFinder.html">Organisation Finder</a></li>
-      <li><a href="operations.html">Metrics: Operations</a></li>
+
+      <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Metrics <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="operations.html">Operations</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="waitTime.html">Metrics: Wait Time</a></li>
+          </ul>
+      </li>
     </ul>
+
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
