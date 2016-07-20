@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e62e779c-d161-4edd-baed-0f88892a915e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js" afterPath="$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" afterPath="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/static/js/wait.js" afterPath="$PROJECT_DIR$/myNHS/web/projects/static/js/wait.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html" afterPath="$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/templates/operations.html" afterPath="$PROJECT_DIR$/myNHS/web/projects/templates/operations.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/templates/waitTime.html" afterPath="$PROJECT_DIR$/myNHS/web/projects/templates/waitTime.html" />
     </list>
     <ignored path="SamPy.iws" />
@@ -54,8 +53,8 @@
       <file leaf-file-name="organisationFinder.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="583">
-              <caret line="100" column="24" selection-start-line="100" selection-start-column="15" selection-end-line="100" selection-end-column="24" />
+            <state relative-caret-position="568">
+              <caret line="99" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -63,41 +62,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="finder.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="84" column="114" selection-start-line="84" selection-start-column="114" selection-end-line="84" selection-end-column="114" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="operations.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/operations.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+            <state relative-caret-position="553">
+              <caret line="113" column="114" selection-start-line="113" selection-start-column="114" selection-end-line="113" selection-end-column="114" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="waitTime.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="waitTime.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/waitTime.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="568">
-              <caret line="118" column="42" selection-start-line="118" selection-start-column="42" selection-end-line="118" selection-end-column="42" />
+              <caret line="118" column="114" selection-start-line="118" selection-start-column="114" selection-end-line="118" selection-end-column="114" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wait.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="finder.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="622">
+              <caret line="53" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wait.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/wait.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="118" column="4" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
+            <state relative-caret-position="-1190">
+              <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="operations.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="682">
+              <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -156,14 +165,14 @@
         <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/treatement.js" />
         <option value="$PROJECT_DIR$/SandN/web/projects/app.py" />
         <option value="$PROJECT_DIR$/myNHS/analysis/hipReplacements.py" />
-        <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/templates/index.html" />
-        <option value="$PROJECT_DIR$/myNHS/web/projects/templates/operations.html" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/app.py" />
-        <option value="$PROJECT_DIR$/myNHS/web/projects/templates/waitTime.html" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/wait.js" />
+        <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" />
+        <option value="$PROJECT_DIR$/myNHS/web/projects/templates/operations.html" />
+        <option value="$PROJECT_DIR$/myNHS/web/projects/templates/waitTime.html" />
       </list>
     </option>
   </component>
@@ -1034,14 +1043,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="112" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myNHS/web/projects/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1507">
@@ -1052,18 +1053,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/waitTime.html">
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="118" column="42" selection-start-line="118" selection-start-column="42" selection-end-line="118" selection-end-column="42" />
+        <state relative-caret-position="622">
+          <caret line="53" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/wait.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1190">
+          <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
-          <caret line="100" column="24" selection-start-line="100" selection-start-column="15" selection-end-line="100" selection-end-column="24" />
+        <state relative-caret-position="568">
+          <caret line="99" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
@@ -1072,24 +1089,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/operations.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+        <state relative-caret-position="553">
+          <caret line="113" column="114" selection-start-line="113" selection-start-column="114" selection-end-line="113" selection-end-column="114" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js">
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/waitTime.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="84" column="114" selection-start-line="84" selection-start-column="114" selection-end-line="84" selection-end-column="114" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/wait.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="118" column="4" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
+        <state relative-caret-position="568">
+          <caret line="118" column="114" selection-start-line="118" selection-start-column="114" selection-end-line="118" selection-end-column="114" />
           <folding />
         </state>
       </provider>
