@@ -4,6 +4,73 @@ queue()
     .defer(d3.json, "/myNHS/waitTimeData")
     .await(makeGraphs);
 
+
+function reduceAddAvg(attr) {
+  return function(p,v) {
+    ++p.count
+    p.sum += v[attr];
+
+    if (p.count > 0){
+        p.avg = p.sum/p.count;
+    } else {
+        p.avg = 0;
+    }
+
+    return p;
+  };
+};
+
+function reduceRemoveAvg(attr) {
+  return function(p,v) {
+    --p.count
+    p.sum -= v[attr];
+
+    if (p.count > 0){
+        p.avg = p.sum/p.count;
+    } else {
+        p.avg = 0;
+    }
+
+    return p;
+  };
+};
+
+function reduceInitAvg() {
+  return {count:0, sum:0, avg:0};
+};
+
+
+function reduceAdd(p, v) {
+    p.total += v.Value;
+    ++p.count;
+    if (p.count > 0){
+        p.average = d3.round((p.total / p.count), 1);
+    }else {
+        p.average = 0;
+    }
+    return p;
+}
+
+function reduceRemove(p, v) {
+    p.total -= v.Value;
+    --p.count;
+    if (p.count > 0){
+        p.average = d3.round((p.total / p.count), 1);
+    }else {
+        p.average = 0;
+    }
+    return p;
+}
+
+function reduceInitial() {
+    return {
+        total: 0,
+        count: 0,
+        average: 0,
+    };
+}
+
+
 function makeGraphs(error, projectsJson) {
 	//Set Data Formatters
 	var dateFormat = d3.time.format("%Y-%m-%d");
@@ -27,8 +94,15 @@ function makeGraphs(error, projectsJson) {
 	var OrganisationNameDim = ndx.dimension(function(d) { return d.OrganisationName; });
 	var OrganisationTypeIDDim = ndx.dimension(function(d) { return d.OrganisationTypeID; });
 	var isPimsManagedDim = ndx.dimension(function(d) { return d.IsPimsManaged; });
-	var monthDim  = ndx.dimension(function(d) {return d.month;})
 	var serviceNameDim = ndx.dimension(function(d) {return d.ServiceName;})
+
+        // dimension by month
+        var monthDim = ndx.dimension(function(d) {
+            var month = d.month;
+        //    var name = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+            var name = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+            return name[month-1];
+        });
 
     // Set up Groups
 	var OrganisationNameGroup = OrganisationNameDim.group();
@@ -37,11 +111,17 @@ function makeGraphs(error, projectsJson) {
 	var serviceNameGroup = serviceNameDim.group();
 
     // Compute sums and counts
-	var Total = OrganisationNameGroup.reduceSum(function(d) {return d.Value;});
 	var TypeCount = OrganisationTypeIDGroup.reduceCount();
 	var PimsCount = isPimsManagedGroup.reduceCount();
 	var countPerMonth = monthDim.group().reduceCount();
 	var serviceNameCount = serviceNameGroup.reduceCount();
+	//var average = OrganisationNameGroup.reduce(reduceAddAvg('Value'), reduceRemoveAvg('Value'), reduceInitAvg);
+	var average = OrganisationNameGroup.reduceSum(function(d) {return d.Value});
+	//var average = OrganisationNameGroup.reduce(reduceAdd, reduceRemove, reduceInitial);;
+	//var average = reductio().avg(function(d) { return +d.Value; })(OrganisationNameGroup);
+	//var average = reductio().min(function(d) { return +d.Value; })(OrganisationNameGroup);
+    console.log(average.top(4));
+
 
     //Charts
 	var Chart = dc.rowChart("#row-chart");
@@ -103,11 +183,14 @@ function makeGraphs(error, projectsJson) {
         .height(530)
         .gap(2)
         .dimension(OrganisationNameDim)
-        .group(Total)
+        .group(average)
         .elasticX(true)
-        .ordering(function(d) { return -d.value })
         .label(function (d) { return d.key })
-        .title(function (d) { return d.value })
+        //.valueAccessor(function (p) {return p.value.avg;})
+        //.ordering(function(p) { return -p.value.min })
+        .ordering(function(d) { return -d.value })
+        //.title(function (d) { return +d.value.min.toFixed(1)  })
+        .title(function (d) { return d.value})
         .renderTitleLabel(true)
         .rowsCap(30);
 
