@@ -72,7 +72,7 @@ function makeGraphs(error, projectsJson) {
         marker.bindPopup("<p><strong>Name:</strong><br>" + name +  "<br><strong>Address:</strong><br>" + a1 +
                          "<br>" + a2 + "<br>" + a3 + "<br>" + postcode +
                          "<br><strong>Phone Number:</strong><br>" + organisationContactValue + "</p>");
-        marker.setRadius(3)
+        marker.setRadius(5)
 
         Markers.addLayer(marker);
 

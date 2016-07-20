@@ -71,11 +71,11 @@ def finderData():
     organisationContact as b,
     organisationType as c
     where
-    a.organisationID = b.organisationID and
-    a.organisationTypeID = c.OrganisationTypeID and
     b.organisationContactMethodTypeID = 1 and
-	a.Latitude != "" and a.Longitude != "" and
-	a.OrganisationName != "" and a.Postcode != ""
+    a.Latitude != "" and a.Longitude != "" and
+	a.OrganisationName != "" and a.Postcode != "" and
+    a.organisationID = b.organisationID and
+    a.organisationTypeID = c.OrganisationTypeID
 	order by a.OrganisationName'''
 
     data = nhs.QueryDB(sql)
@@ -98,19 +98,21 @@ def operationsData():
     metric as c,
 	treatment as d
     where
-    a.organisationID = b.organisationID and
-    b.metricID = c.metricID and
-	b.treatmentID = d.treatmentID and
     b.metricID = 7 and
     a.Latitude != "" and a.Longitude != "" and a.OrganisationName != "" and
-	c.isDeleted = 0'''
-
+	c.isDeleted = 0 and
+    a.organisationID = b.organisationID and
+    b.metricID = c.metricID and
+	b.treatmentID = d.treatmentID
+	order by a.OrganisationName
+   '''
     data = nhs.QueryDB(sql)
 
     # change values to numeric
     data['Value'] = pd.to_numeric(data['Value'], errors='coerce')
     data['Value'].fillna(value=0, inplace=True)
 
+    # convert to JSON
     data = data.to_json(orient='records')
 
     return data

@@ -19,33 +19,27 @@ function makeGraphs(error, projectsJson) {
 
     //Create a Crossfilter instance
 	var ndx = crossfilter(data);
-	var all = ndx.groupAll();
 
 	// Define Dimensions
 	var allDim = ndx.dimension(function(d) {return d;});
 	var OrganisationNameDim = ndx.dimension(function(d) { return d.OrganisationName; });
 	var OrganisationTypeIDDim = ndx.dimension(function(d) { return d.OrganisationTypeID; });
-	var ValueDim = ndx.dimension(function(d) { return d.Value; });
 	var DateDim = ndx.dimension(function(d) { return d.date; });
-	var TreatmentDim  = ndx.dimension(function(d) {return d.TreatmentID;})
 	var TreatmentNameDim  = ndx.dimension(function(d) {return d.TreatmentName;})
 
     // Set up Groups
 	var OrganisationNameGroup = OrganisationNameDim.group();
 	var OrganisationTypeIDGroup = OrganisationTypeIDDim.group();
-	var TreatmentGroup = TreatmentDim.group();
 	var TreatmentNameGroup = TreatmentNameDim.group();
 	var DateGroup = DateDim.group();
 
     // Compute sums and counts
 	var Total = OrganisationNameGroup.reduceSum(function(d) {return d.Value;});
 	var TypeCount = OrganisationTypeIDGroup.reduceCount();
-	var TreatmentCount = TreatmentGroup.reduceCount();
 	var countPerDate = DateGroup.reduceSum(function(d) {return d.Value;});
 
     //Charts
 	var Chart = dc.rowChart("#row-chart");
-	var number = dc.numberDisplay("#number");
     var typeChart = dc.pieChart('#chart-type');
     var yearChart = dc.bubbleChart('#chart-year');
     // Table
@@ -107,7 +101,7 @@ function makeGraphs(error, projectsJson) {
 
 	Chart
         .width(700)
-        .height(550)
+        .height(530)
         .gap(2)
         .dimension(OrganisationNameDim)
         .group(Total)
@@ -118,15 +112,9 @@ function makeGraphs(error, projectsJson) {
         .renderTitleLabel(true)
         .rowsCap(30);
 
-	number
-        .formatNumber(d3.format("d"))
-        .valueAccessor(function(d){return d; })
-        .group(all);
-
     dataTable
     .dimension(allDim)
     .group(function (d) { return 'dc.js insists on putting a row here so I remove it using JS'; })
-    .size(30)
     .columns([
       function (d) { return d.OrganisationName; },
       function (d) { return d.OrganisationTypeID; },
@@ -137,6 +125,7 @@ function makeGraphs(error, projectsJson) {
     ])
     .sortBy(dc.pluck('Value'))
     .order(d3.descending)
+    .size(30)
     .on('renderlet', function (table) {
       // each time table is rendered remove nasty extra row dc.js insists on adding
       table.select('tr.dc-table-group').remove();
@@ -152,7 +141,7 @@ function makeGraphs(error, projectsJson) {
 
         var marker = L.circleMarker([d.Latitude, d.Longitude]);
         marker.bindPopup("<p>" + name +  "<br>" + a1 + "<br>" + a2 + "<br>" + a3 + "<br>" + postcode + "</p>");
-        marker.setRadius(Math.max(2, Math.min(d.Value / 50, 30)));
+        marker.setRadius(Math.max(2, Math.min(d.Value / 50, 20)));
 
         Markers.addLayer(marker);
       });

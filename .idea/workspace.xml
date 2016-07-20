@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e62e779c-d161-4edd-baed-0f88892a915e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/myNHS/web/projects/templates/operations.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myNHS/web/projects/static/js/graphs.js" afterPath="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SandN/web/projects/app.py" afterPath="$PROJECT_DIR$/SandN/web/projects/app.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/analysis/hipReplacements.py" afterPath="$PROJECT_DIR$/myNHS/analysis/hipReplacements.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/app.py" afterPath="$PROJECT_DIR$/myNHS/web/projects/app.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js" afterPath="$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/static/lib/css/main.css" afterPath="$PROJECT_DIR$/myNHS/web/projects/static/lib/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/templates/index.html" afterPath="$PROJECT_DIR$/myNHS/web/projects/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html" afterPath="$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" afterPath="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" />
     </list>
     <ignored path="SamPy.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,8 +63,8 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myNHS/web/projects/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+            <state relative-caret-position="1042">
+              <caret line="114" column="21" selection-start-line="114" selection-start-column="21" selection-end-line="114" selection-end-column="21" />
               <folding>
                 <element signature="e#303#322#0" expanded="true" />
               </folding>
@@ -77,21 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="finder.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="56" column="21" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="operations.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="138" column="25" selection-start-line="138" selection-start-column="25" selection-end-line="138" selection-end-column="25" />
+            <state relative-caret-position="420">
+              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -143,7 +128,6 @@
         <option value="$PROJECT_DIR$/myNHS/analysis/metrics.py" />
         <option value="$PROJECT_DIR$/sandbox/plotly.py" />
         <option value="$PROJECT_DIR$/sandbox/plotlyExample.py" />
-        <option value="$PROJECT_DIR$/myNHS/analysis/hipReplacements.py" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/graphs.js" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/templates/hipReplacement.html" />
         <option value="$PROJECT_DIR$/SandN/web/projects/templates/index.html" />
@@ -152,10 +136,11 @@
         <option value="$PROJECT_DIR$/myNHS/web/projects/templates/organisationFinder.html" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/templates/index.html" />
         <option value="$PROJECT_DIR$/SandN/web/projects/app.py" />
-        <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/templates/operations.html" />
-        <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" />
+        <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js" />
+        <option value="$PROJECT_DIR$/myNHS/analysis/hipReplacements.py" />
         <option value="$PROJECT_DIR$/myNHS/web/projects/app.py" />
+        <option value="$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js" />
       </list>
     </option>
   </component>
@@ -205,6 +190,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="SamPy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SamPy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SamPy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myNHS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SamPy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SamPy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myNHS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="analysis" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -868,14 +885,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myNHS/analysis/hipReplacements.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="23" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda/lib/python3.5/site-packages/flask/templating.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1815">
@@ -964,14 +973,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="56" column="21" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myNHS/web/projects/templates/operations.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -980,10 +981,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/app.py">
+    <entry file="file://$PROJECT_DIR$/myNHS/analysis/hipReplacements.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="e#274#293#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/finder.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="427">
-          <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+          <caret line="74" column="26" selection-start-line="74" selection-start-column="26" selection-end-line="74" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNHS/web/projects/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1042">
+          <caret line="114" column="21" selection-start-line="114" selection-start-column="21" selection-end-line="114" selection-end-column="21" />
           <folding>
             <element signature="e#303#322#0" expanded="true" />
           </folding>
@@ -992,8 +1011,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myNHS/web/projects/static/js/operations.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="138" column="25" selection-start-line="138" selection-start-column="25" selection-end-line="138" selection-end-column="25" />
+        <state relative-caret-position="420">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -31,8 +31,6 @@ from bokeh.models import GMapPlot, Range1d, GMapOptions, ColumnDataSource, Circl
 from bokeh.models import PanTool, BoxZoomTool, WheelZoomTool, HoverTool
 from bokeh.layouts import row
 from bokeh.charts import Bar
-from bokeh.plotting import figure
-from bokeh.models.ranges import FactorRange
 
 
 def QueryDB(sql, location='sqlite:////Users/saminiemi/Projects/myNHS/data/myNHS.db'):
