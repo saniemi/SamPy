@@ -51,8 +51,6 @@ function makeGraphs(error, projectsJson) {
         .dimension(TreatmentNameDim)
         .group(TreatmentNameGroup.reduceCount());
 
-
-    /* instantiate and configure map */
     /* instantiate and configure map */
     L.mapbox.accessToken = 'pk.eyJ1Ijoic25pZW1pIiwiYSI6ImNpcW85ejZwbjAwNWNpMm5rejJuMzN1Z2cifQ.8FblzFWMjmRLfwrW5ZyvUg';
 
@@ -60,9 +58,9 @@ function makeGraphs(error, projectsJson) {
     var streets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       id: 'mapbox.streets',
       accessToken: 'pk.eyJ1Ijoic25pZW1pIiwiYSI6ImNpcW85ejZwbjAwNWNpMm5rejJuMzN1Z2cifQ.8FblzFWMjmRLfwrW5ZyvUg'});
-    // contours
-    custom = L.geoJson(null, {style: {"color": "black", "weight": 3, "opacity": 0.15}});
-    var CCG = omnivore.kml('./static/data/CCG_BSC_Apr2015.KML', null, custom);
+    // CCG areas
+    custom = L.geoJson(null, {style: style});
+    var CCG = omnivore.kml('./static/data/augmented.KML', null, custom);
 
     // Set up the map
     var map = L.map('map', {center: [53.4, -1.2], zoom:6, layers:[streets, CCG]});
@@ -76,6 +74,100 @@ function makeGraphs(error, projectsJson) {
 
     // Markers feature group
     var Markers = new L.FeatureGroup().bringToFront();
+
+//    // Add info
+//    var info = L.control();
+//    info.onAdd = function (map) {
+//        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+//        this.update();
+//        return this._div;
+//    };
+//
+//    // method that we will use to update the control based on feature properties passed
+//    info.update = function (props) {
+//        this._div.innerHTML = '<h4>Population</h4>' +  (props ?
+//            '<b>' + props.population + '</b><br />'
+//            : 'Hover over a CCG');
+//    };
+//    info.addTo(map);
+
+    function getColor(d) {
+        return d > 300000 ? '#800026' :
+               d > 250000  ? '#BD0026' :
+               d > 200000  ? '#E31A1C' :
+               d > 180000  ? '#FC4E2A' :
+               d > 140000   ? '#FD8D3C' :
+               d > 120000   ? '#FEB24C' :
+               d > 100000   ? '#FED976' :
+                             '#FFEDA0';
+    }
+
+    function style(feature) {
+        //console.log(feature)
+        //console.log(feature.properties.population)
+        return {
+            fillColor: getColor(+feature.properties.population),
+            weight: 2,
+            opacity: 1,
+            color: 'black',
+            dashArray: '3',
+            fillOpacity: 0.3
+        };
+    }
+
+    function highlightFeature(e) {
+        var layer = e.target;
+
+        layer.setStyle({
+            weight: 4,
+            color: '#666',
+            dashArray: '',
+            fillOpacity: 0.5
+        });
+
+        if (!L.Browser.ie && !L.Browser.opera) {
+            layer.bringToFront();
+        }
+
+        info.update(layer.feature.properties);
+
+    }
+
+    function resetHighlight(e) {
+        custom.resetStyle(e.target);
+        info.update();
+    }
+
+
+    function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+    }
+
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+            click: zoomToFeature
+        });
+    }
+
+    // Add legend
+    var legend = L.control({position: 'bottomright'});
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend'),
+            grades = [0, 100000, 120000, 140000, 180000, 200000, 250000, 300000],
+            labels = [];
+
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        }
+
+        return div;
+    };
+    legend.addTo(map);
 
     typeChart
         .width(160)
