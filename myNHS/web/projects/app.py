@@ -28,10 +28,12 @@ Version
 import pandas as pd
 from flask import Flask
 from flask import render_template
+from flask.ext.compress import Compress
 from sqlalchemy import create_engine
 
 
 app = Flask(__name__)
+Compress(app)
 
 
 def QueryDB(sql, location='sqlite:////Users/saminiemi/Projects/myNHS/data/myNHS.db'):
@@ -102,7 +104,6 @@ def finderData():
     a.organisationID = b.organisationID and
     a.organisationTypeID = c.OrganisationTypeID
 	order by a.OrganisationName'''
-
     data = QueryDB(sql)
 
     data = data.to_json(orient='records')
@@ -114,8 +115,7 @@ def finderData():
 def operationsData():
     sql = '''select
     a.OrganisationName, a.OrganisationTypeID, a.Latitude, a.Longitude, a.Address1, a.Address2, a.Address3, a.postcode,
-    b.value, b.text, b.TreatmentID, b.isCurrentLastModified,
-    c.DisplayName,
+    b.value, b.TreatmentID, b.isCurrentLastModified,
 	 d.TreatmentName
     from
     organisation as a,
@@ -148,8 +148,7 @@ def waitTimeData():
     sql = '''select
     a.OrganisationName, a.OrganisationTypeID, a.Latitude, a.Longitude, a.Address1, a.Address2, a.Address3, a.postcode,
     a.isPimsManaged,
-    b.value, b.text, b.isCurrentLastModified,
-    c.DisplayName,
+    b.value, b.isCurrentLastModified,
 	e.ServiceName
     from
     organisation as a,
@@ -165,7 +164,6 @@ def waitTimeData():
 	d.serviceID = e.serviceID and
     b.metricID = c.metricID and
     b.metricID = 64'''
-
     data = QueryDB(sql)
 
     # change values to numeric
