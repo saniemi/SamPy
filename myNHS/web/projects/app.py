@@ -10,6 +10,7 @@ Requirements
 
 :requires: Flask
 :requires: pandas
+:requires: sqlalchemy
 
 
 Author
@@ -21,16 +22,31 @@ Author
 Version
 -------
 
-:version: 0.1
-:date: 19-Jul-2016
+:version: 0.2
+:date: 25-Jul-2016
 """
 import pandas as pd
 from flask import Flask
 from flask import render_template
-from SamPy.myNHS.analysis import hipReplacements as nhs
+from sqlalchemy import create_engine
 
 
 app = Flask(__name__)
+
+
+def QueryDB(sql, location='sqlite:////Users/saminiemi/Projects/myNHS/data/myNHS.db'):
+    """
+
+    :param sql:
+    :param location:
+
+    :return: dataframe
+
+    """
+    disk_engine = create_engine(location)
+    df = pd.read_sql_query(sql, disk_engine)
+
+    return df
 
 
 @app.route("/")
@@ -87,7 +103,7 @@ def finderData():
     a.organisationTypeID = c.OrganisationTypeID
 	order by a.OrganisationName'''
 
-    data = nhs.QueryDB(sql)
+    data = QueryDB(sql)
 
     data = data.to_json(orient='records')
 
@@ -115,7 +131,7 @@ def operationsData():
 	b.treatmentID = d.treatmentID
 	order by a.OrganisationName
    '''
-    data = nhs.QueryDB(sql)
+    data = QueryDB(sql)
 
     # change values to numeric
     data['Value'] = pd.to_numeric(data['Value'], errors='coerce')
@@ -150,7 +166,7 @@ def waitTimeData():
     b.metricID = c.metricID and
     b.metricID = 64'''
 
-    data = nhs.QueryDB(sql)
+    data = QueryDB(sql)
 
     # change values to numeric
     data['Value'] = pd.to_numeric(data['Value'], errors='coerce')

@@ -1,4 +1,21 @@
-// Finder Graphs
+//myNHS Dashboard
+//===============
+//
+//Simple set of graphs for the Organisation Finder
+//
+//
+//Author
+//------
+//
+//:author: Sami Niemi (sami.niemi@valtech.co.uk)
+//
+//
+//Version
+//-------
+//
+//:version: 0.3
+//:date: 25-Jul-2016
+
 
 queue()
     .defer(d3.json, "/myNHS/finderData")
@@ -88,7 +105,7 @@ function makeGraphs(error, projectsJson) {
             opacity: 1,
             color: 'black',
             dashArray: '3',
-            fillOpacity: 0.3
+            fillOpacity: 0.2
         };
     }
 

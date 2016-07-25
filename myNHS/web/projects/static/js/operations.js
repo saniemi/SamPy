@@ -1,4 +1,21 @@
-// Treatment Graphs
+//myNHS Dashboard
+//===============
+//
+//Simple set of graphs for the Operations view.
+//
+//
+//Author
+//------
+//
+//:author: Sami Niemi (sami.niemi@valtech.co.uk)
+//
+//
+//Version
+//-------
+//
+//:version: 0.4
+//:date: 25-Jul-2016
+
 
 queue()
     .defer(d3.json, "/myNHS/operationsData")
@@ -111,7 +128,7 @@ function makeGraphs(error, projectsJson) {
             opacity: 1,
             color: 'black',
             dashArray: '3',
-            fillOpacity: 0.3
+            fillOpacity: 0.2
         };
     }
 
