@@ -19,6 +19,7 @@
 
 queue()
     .defer(d3.json, "/myNHS/finderData")
+    //.defer(d3.csv, "./static/data/finder.csv")
     .await(makeGraphs);
 
 

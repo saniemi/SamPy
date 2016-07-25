@@ -19,6 +19,7 @@
 
 queue()
     .defer(d3.json, "/myNHS/waitTimeData")
+    //.defer(d3.csv, "./static/data/waittime.csv")
     .await(makeGraphs);
 
 
@@ -64,6 +65,7 @@ function makeGraphs(error, projectsJson) {
 
 	//Modify
     data.forEach(function(d) {
+        d.Value = +d.Value;
         d.date = dateFormat.parse(d.IsCurrentLastModified);
         d.month = +monthFormat(d.date);
     });
@@ -295,14 +297,16 @@ function makeGraphs(error, projectsJson) {
       Markers.clearLayers();
       _.each(allDim.top(5000), function (d) {
         var name = d.OrganisationName;
-        var a1 = d.Address1;
-        var a2 = d.Address2;
-        var a3 = d.Address3;
-        var postcode = d.Postcode;
+//        var a1 = d.Address1;
+//        var a2 = d.Address2;
+//        var a3 = d.Address3;
+//        var postcode = d.Postcode;
 
         var marker = L.circleMarker([d.Latitude, d.Longitude]);
-        marker.bindPopup("<p><strong>Name:</strong><br>" + name +  "<br><strong>Address:</strong><br>" + a1 +
-                         "<br>" + a2 + "<br>" + a3 + "<br>" + postcode + "</p>");
+//        marker.bindPopup("<p><strong>Name:</strong><br>" + name +  "<br><strong>Address:</strong><br>" + a1 +
+//                         "<br>" + a2 + "<br>" + a3 + "<br>" + postcode + "</p>");
+        marker.bindPopup("<p><strong>Name:</strong><br>" + name + "</p>");
+
         marker.setRadius(d.Value)
 
         Markers.addLayer(marker);

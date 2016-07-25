@@ -19,6 +19,7 @@
 
 queue()
     .defer(d3.json, "/myNHS/operationsData")
+    //.defer(d3.csv, "./static/data/operations.csv")
     .await(makeGraphs);
 
 
@@ -256,14 +257,15 @@ function makeGraphs(error, projectsJson) {
       Markers.clearLayers();
       _.each(allDim.top(5000), function (d) {
         var name = d.OrganisationName;
-        var a1 = d.Address1;
-        var a2 = d.Address2;
-        var a3 = d.Address3;
-        var postcode = d.Postcode;
+//        var a1 = d.Address1;
+//        var a2 = d.Address2;
+//        var a3 = d.Address3;
+//        var postcode = d.Postcode;
 
         var marker = L.circleMarker([d.Latitude, d.Longitude]);
-        marker.bindPopup("<p><strong>Name:</strong><br>" + name +  "<br><strong>Address:</strong><br>" + a1 +
-                         "<br>" + a2 + "<br>" + a3 + "<br>" + postcode + "</p>");
+//        marker.bindPopup("<p><strong>Name:</strong><br>" + name +  "<br><strong>Address:</strong><br>" + a1 +
+//                         "<br>" + a2 + "<br>" + a3 + "<br>" + postcode + "</p>");
+        marker.bindPopup("<p><strong>Name:</strong><br>" + name + "</p>");
         marker.setRadius(Math.max(2, Math.min(d.Value / 50, 20)));
 
         Markers.addLayer(marker);
