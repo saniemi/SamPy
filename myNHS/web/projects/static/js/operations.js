@@ -197,7 +197,7 @@ function makeGraphs(error, projectsJson) {
         .innerRadius(30);
 
     yearChart
-        .width(670)
+        .width(540)
         .height(200)
         .margins({ top: 5, right: 10, bottom: 30, left: 80 })
         .dimension(DateDim)
@@ -223,7 +223,7 @@ function makeGraphs(error, projectsJson) {
         .xAxis().ticks(5);
 
 	Chart
-        .width(700)
+        .width(580)
         .height(530)
         .gap(2)
         .dimension(OrganisationNameDim)

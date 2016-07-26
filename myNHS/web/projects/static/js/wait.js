@@ -228,14 +228,14 @@ function makeGraphs(error, projectsJson) {
     legend.addTo(map);
 
     typeChart
-        .width(200)
-        .height(200)
+        .width(170)
+        .height(170)
         .dimension(OrganisationTypeIDDim)
         .group(TypeCount)
-        .innerRadius(50);
+        .innerRadius(30);
 
     ServiceChart
-        .width(600)
+        .width(540)
         .height(310)
         .gap(2)
         .dimension(serviceNameDim)
@@ -247,22 +247,22 @@ function makeGraphs(error, projectsJson) {
         .renderTitleLabel(true);
 
     yearChart
-        .width(200)
-        .height(200)
+        .width(170)
+        .height(170)
         .dimension(monthDim)
         .group(countPerMonth)
-        .innerRadius(50)
+        .innerRadius(30)
         .renderLabel(true);
 
     pimsChart
-        .width(200)
-        .height(200)
+        .width(170)
+        .height(170)
         .dimension(isPimsManagedDim)
         .group(PimsCount)
-        .innerRadius(50);
+        .innerRadius(30);
 
 	Chart
-        .width(700)
+        .width(550)
         .height(530)
         .gap(2)
         .dimension(OrganisationNameDim)
