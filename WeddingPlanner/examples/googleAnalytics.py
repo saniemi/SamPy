@@ -89,13 +89,17 @@ def main():
 
     # Use the developer console and replace the values with your
     # service account email and relative location of your key file.
-    service_account_email = '<Replace with your service account email address.>'
-    key_file_location = '<Replace with /path/to/generated/client_secrets.p12>'
+    service_account_email = 'weddingplanner@weddingplanner-1469795849595.iam.gserviceaccount.com'
+    key_file_location = 'WeddingPlanner-a60a96b14c99.p12'
 
     # Authenticate and construct service.
     service = get_service('analytics', 'v3', scope, key_file_location, service_account_email)
     profile = get_first_profile_id(service)
-    print_results(get_results(service, profile))
+    results = get_results(service, profile)
+
+    print_results(results)
+
+    return results
 
 
 if __name__ == '__main__':

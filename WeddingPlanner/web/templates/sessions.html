@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Dashboard</title>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="./static/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/lib/css/keen-dashboards.css">
+    <link rel="stylesheet" href="./static/lib/css/dc.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css'/>
+
+    <link rel="stylesheet" href="./static/lib/css/main.css">
+
+
+</head>
+
+
+<body class="application">
+
+<nav class="navbar navbar-fixed-top navbar-default navbar-fnt navbar-backgrnd">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">WeddingPlanner.co.uk</a>
+    </div>
+
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li class="active"><a href="sessions.html">Session Explorer</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="https://www.valtech.co.uk"><img style="max-width:200px; margin-top: -12px; max-height:35px; margin-bottom: -10px;" src="/static/figs/AgileData.png"></a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-md-12">
+        <h4>Sessions and Bounces<small><a id="time">reset</a></small></h4>
+        <div class="dc-chart" id="time-chart" ></div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-12">
+        <h4>Bounce Rate<small><a id="rate">reset</a></small></h4>
+        <div class="dc-chart" id="rate-chart" ></div>
+    </div>
+
+  </div>
+
+  <script src="./static/lib/js/jquery.min.js"></script>
+  <script src="./static/lib/js/bootstrap.min.js"></script>
+  <script src="./static/lib/js/crossfilter.min.js"></script>
+   <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="./static/lib/js/dc.min.js"></script>
+  <script src="./static/lib/js/queue.js"></script>
+  <script src="./static/lib/js/keen.min.js"></script>
+  <script src="./static/lib/js/underscore-min.js" type="text/javascript" ></script>
+  <script src='./static/js/sessions.js' type='text/javascript'></script>
+
+
+</body>
+</html>
