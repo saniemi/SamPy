@@ -56,7 +56,7 @@ def index():
 
 
 @app.route("/sessions.html")
-def operations():
+def sessions():
     """
 
     :return:
@@ -64,8 +64,17 @@ def operations():
     return render_template("sessions.html")
 
 
+@app.route("/users.html")
+def users():
+    """
+
+    :return:
+    """
+    return render_template("users.html")
+
+
 @app.route("/WeddingPlanner/sessions")
-def waitTimeData():
+def sessionsData():
     # get data from store
     data = getTableFromStore('sessions')
 
@@ -73,6 +82,18 @@ def waitTimeData():
     data = data.to_json(orient='records')
 
     return data
+
+
+@app.route("/WeddingPlanner/users")
+def usersData():
+    # get data from store
+    data = getTableFromStore('users')
+
+    # convert to JSON
+    data = data.to_json(orient='records')
+
+    return data
+
 
 
 if __name__ == "__main__":

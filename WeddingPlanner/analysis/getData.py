@@ -134,11 +134,48 @@ def _get_browser(service, profile_id):
     """
     print('Retrieving browser information...')
     return service.data().ga().get(ids='ga:' + profile_id,
-                                   start_date='180daysAgo',
+                                   start_date='356daysAgo',
                                    end_date='yesterday',
                                    metrics='ga:sessions,ga:bounces,ga:sessionDuration,ga:bounceRate,ga:avgSessionDuration',
                                    dimensions='ga:browser',
                                    max_results=10000).execute()
+
+
+def _get_social_media(service, profile_id):
+    """
+    Use the Analytics Service Object to query the Core Reporting API
+    for the number of sessions within the past seven days.
+
+    :param service:
+    :param profile_id:
+    :return:
+    """
+    print('Retrieving social media information...')
+    return service.data().ga().get(ids='ga:' + profile_id,
+                                   start_date='356daysAgo',
+                                   end_date='yesterday',
+                                   metrics='ga:sessionDuration,ga:bounceRate,ga:avgSessionDuration,ga:goalCompletionsAll,ga:avgTimeOnPage,ga:goal10Starts',
+                                   dimensions='ga:userType,ga:socialNetwork',
+                                   max_results=10000).execute()
+
+
+def _get_users(service, profile_id):
+    """
+    Use the Analytics Service Object to query the Core Reporting API
+    for the number of sessions within the past seven days.
+
+    :param service:
+    :param profile_id:
+    :return:
+    """
+    print('Retrieving user information...')
+    return service.data().ga().get(ids='ga:' + profile_id,
+                                   start_date='356daysAgo',
+                                   end_date='yesterday',
+                                   metrics='ga:bounceRate,ga:goalCompletionsAll,ga:goal10Starts,ga:sessions,ga:avgSessionDuration,ga:goalStartsAll,ga:goalValueAll,ga:goalValuePerSession,ga:goalAbandonRateAll',
+                                   dimensions='ga:userType,ga:socialNetwork,ga:userAgeBracket,ga:userGender,ga:source,ga:yearMonth,ga:deviceCategory',
+                                   max_results=10000).execute()
+
 
 
 def _get_sessions(service, profile_id):
@@ -222,18 +259,22 @@ def get_data():
     profile = get_first_profile_id(service)
 
     # get data
-    path = _get_path(service, profile)
-    city = _get_location(service, profile)
-    browser = _get_browser(service, profile)
-    os = _get_OS(service, profile)
+    # path = _get_path(service, profile)
+    # city = _get_location(service, profile)
+    # browser = _get_browser(service, profile)
+    # os = _get_OS(service, profile)
     sessions = _get_sessions(service, profile)
+    socialm = _get_social_media(service, profile)
+    users = _get_users(service, profile)
 
     # convert to pandas and store
-    city = convertToPandas(city, store, outputname='location')
-    path = convertToPandas(path, store, outputname='path')
-    browser = convertToPandas(browser, store, outputname='browser')
-    os = convertToPandas(os, store, outputname='os')
+    # city = convertToPandas(city, store, outputname='location')
+    # path = convertToPandas(path, store, outputname='path')
+    # browser = convertToPandas(browser, store, outputname='browser')
+    # os = convertToPandas(os, store, outputname='os')
     sessions = convertToPandas(sessions, store, outputname='sessions')
+    socialm = convertToPandas(socialm, store, outputname='socialmedia')
+    users = convertToPandas(users, users, outputname='socialmedia')
 
     store.close()
 

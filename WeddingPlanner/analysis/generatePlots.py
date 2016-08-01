@@ -41,6 +41,52 @@ def getTableFromStore(table, storename='store.h5', verbose=False):
     return df
 
 
+def plotSocialMedia(df):
+    df = df.apply(pd.to_numeric, errors='ignore')
+    print(df.info())
+
+    fig, ax = plt.subplots(figsize=(10, 10))
+    sns.corrplot(df, ax=ax)
+    plt.savefig('socialNetworkCorrelations.png', tight_layout=True)
+    plt.close()
+
+    # mean session duration
+    df.sort_values("avgSessionDuration", ascending=False, inplace=True)
+    g = sns.barplot(y='socialNetwork', x='avgSessionDuration', hue='userType', data=df)
+    g.set(xlabel='Average Session Duration', ylabel='')
+    plt.subplots_adjust(left=.17)
+    sns.despine(left=True, bottom=True)
+    plt.savefig('socialNetworkAvgDuration.png')
+    plt.close()
+
+    # bounceRate
+    df.sort_values("bounceRate", inplace=True)
+    g = sns.barplot(y='socialNetwork', x='bounceRate', hue='userType', data=df)
+    g.set(xlabel='Bounce Rate', ylabel='')
+    plt.subplots_adjust(left=.17)
+    sns.despine(left=True, bottom=True)
+    plt.savefig('socialNetworkBounceRate.png')
+    plt.close()
+
+    # avgTimeOnPage
+    df.sort_values("avgTimeOnPage", ascending=False, inplace=True)
+    g = sns.barplot(y='socialNetwork', x='avgTimeOnPage', hue='userType', data=df)
+    g.set(xlabel='Average Time on Page', ylabel='')
+    plt.subplots_adjust(left=.17)
+    sns.despine(left=True, bottom=True)
+    plt.savefig('socialNetworkavgTimeOnPage.png')
+    plt.close()
+
+    # goals completed
+    df.sort_values("goalCompletionsAll", ascending=False, inplace=True)
+    g = sns.barplot(y='socialNetwork', x='goalCompletionsAll', hue='userType', data=df)
+    g.set(xlabel='Goal Completions', ylabel='', xscale='log')
+    plt.subplots_adjust(left=.17)
+    sns.despine(left=True, bottom=True)
+    plt.savefig('socialNetworkgoalCompletionsAll.png')
+    plt.close()
+
+
 def plotSessions(df):
     cols = ['sessions', 'bounces', 'sessionDuration', 'bounceRate', 'avgSessionDuration']
     # convert to date time
@@ -106,47 +152,32 @@ def plotSessions(df):
 
 
 def plotBrowsers(df):
+    df = df.apply(pd.to_numeric, errors='ignore')
+    print(df.info())
 
-    ax = sns.barplot(y="browser", x="sessionDuration", data=df)
-    plt.savefig('test1.png')
+    df = df.sort_values("bounceRate")
+    g = sns.barplot(y="browser", x="bounceRate", data=df)
+    g.set(xlabel=('Bounce Rate'))
+    plt.subplots_adjust(left=.3)
+    sns.despine(left=True, bottom=True)
+    plt.savefig('browsers2.png')
     plt.close()
 
-    ax = sns.barplot(y="browser", x="bounceRate", data=df)
-    plt.savefig('test2.png')
+    df = df.sort_values("avgSessionDuration", ascending=False)
+    g = sns.barplot(y="browser", x="avgSessionDuration", data=df)
+    g.set(xlabel=('Average Session Duration [s]'))
+    plt.subplots_adjust(left=.3)
+    sns.despine(left=True, bottom=True)
+    plt.savefig('browsers3.png')
     plt.close()
-
-    ax = sns.barplot(y="browser", x="avgSessionDuration", data=df)
-    plt.savefig('test3.png')
-    plt.close()
-
-
-    # # plot correlations
-    # fig, ax = plt.subplots(figsize=(10, 10))
-    # sns.corrplot(df, ax=ax)
-    # plt.savefig('test3.png', tight_layout=True)
-    # plt.close()
-    #
-    # # filter browsers
-    # df = df.loc[df.browser.isin(['Amazon Silk', 'Android Browser', 'Chrome', 'Edge', 'Firefox',
-    #                              'Internet Explorer', 'Opera', 'Opera Mini', 'Safari', 'UC Browser',
-    #                              'YE', 'YaBrowser'])]
-    #
-    # g = sns.FacetGrid(df, col="browser", margin_titles=True, col_wrap=4, size=4)
-    # g.map(sns.distplot, "bounceRate", hist=False, rug=False, color='green')
-    # plt.savefig('test1.png')
-    # plt.close()
-    #
-    #
-    # g = sns.FacetGrid(df, col="browser", margin_titles=True, col_wrap=4, size=4)
-    # g.map(sns.distplot, "avgSessionDuration", hist=False, rug=False, color='green')
-    # plt.savefig('test2.png')
-    # plt.close()
-
 
 
 if __name__ == '__main__':
+    #sessions = getTableFromStore('sessions')
+    #plotSessions(sessions)
+
     #browsers = getTableFromStore('browser')
     #plotBrowsers(browsers)
 
-    sessions = getTableFromStore('sessions')
-    plotSessions(sessions)
+    socialm = getTableFromStore('socialmedia')
+    plotSocialMedia(socialm)

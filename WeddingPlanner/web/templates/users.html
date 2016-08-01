@@ -28,8 +28,8 @@
 
     <ul class="nav navbar-nav">
       <li><a href="/">Home</a></li>
-      <li class="active"><a href="sessions.html">Session Explorer</a></li>
-      <li><a href="users.html">Users</a></li>
+      <li><a href="sessions.html">Session Explorer</a></li>
+      <li class="active"><a href="users.html">Users</a></li>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
@@ -45,21 +45,57 @@
 
   <div class="row">
 
-    <div class="col-md-12">
-        <h4>Sessions and Bounces<small><a id="time">reset</a></small></h4>
-        <div class="dc-chart" id="time-chart" ></div>
+    <div class="col-md-2 pie-chart">
+      <h4>User Type <small><a id="type">reset</a></small></h4>
+      <div class="dc-chart" id="chart-type"></div>
+    </div>
+
+    <div class="col-md-2 pie-chart">
+      <h4>Source <small><a id="source">reset</a></small></h4>
+      <div class="dc-chart" id="chart-source"></div>
+    </div>
+
+    <div class="col-md-2 pie-chart">
+      <h4>Social Network <small><a id="network">reset</a></small></h4>
+      <div class="dc-chart" id="chart-network" ></div>
+    </div>
+
+    <div class="col-md-2 pie-chart">
+      <h4>Age <small><a id="age">reset</a></small></h4>
+      <div class="dc-chart" id="chart-age" ></div>
+    </div>
+
+    <div class="col-md-2 pie-chart">
+      <h4>Gender <small><a id="gender">reset</a></small></h4>
+      <div class="dc-chart" id="chart-gender" ></div>
+    </div>
+
+    <div class="col-md-2 pie-chart">
+      <h4>Month of Year <small><a id="year">reset</a></small></h4>
+      <div class="dc-chart" id="chart-year" ></div>
     </div>
 
   </div>
 
   <div class="row">
-
-    <div class="col-md-12">
-        <h4>Bounce Rate<small><a id="rate">reset</a></small></h4>
-        <div class="dc-chart" id="rate-chart" ></div>
+    <div class="col-xs-12">
+      <table class="table table-bordered table-striped" id="data-table">
+        <thead>
+          <tr class="header">
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+            <th>E</th>
+            <th>F</th>
+          </tr>
+        </thead>
+      </table>
     </div>
-
   </div>
+</div>
+
+
 
   <script src="./static/lib/js/jquery.min.js"></script>
   <script src="./static/lib/js/bootstrap.min.js"></script>

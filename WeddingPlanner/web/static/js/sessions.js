@@ -19,7 +19,6 @@
 
 queue()
     .defer(d3.json, "/WeddingPlanner/sessions")
-    //.defer(d3.csv, "./static/data/waittime.csv")
     .await(makeGraphs);
 
 
