@@ -89,6 +89,16 @@ def usersData():
     # get data from store
     data = getTableFromStore('users')
 
+    # change source (direct) to direct
+    data['source'].loc[data['source'] == '(direct)'] = 'direct'
+
+    #source facebook and m.facebook should be the same
+    data['source'].loc[data['source'] == 'l.facebook.com'] = 'facebook'
+    data['source'].loc[data['source'] == 'm.facebook.com'] = 'facebook'
+    data['source'].loc[data['source'] == 'facebook.com'] = 'facebook'
+    # remove .com
+    data['source'].loc[data['source'] == 'twitter.com'] = 'twitter'
+
     # convert to JSON
     data = data.to_json(orient='records')
 

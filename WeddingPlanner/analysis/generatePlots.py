@@ -173,11 +173,11 @@ def plotBrowsers(df):
 
 
 if __name__ == '__main__':
-    #sessions = getTableFromStore('sessions')
-    #plotSessions(sessions)
+    sessions = getTableFromStore('sessions')
+    plotSessions(sessions)
 
-    #browsers = getTableFromStore('browser')
-    #plotBrowsers(browsers)
+    browsers = getTableFromStore('browser')
+    plotBrowsers(browsers)
 
     socialm = getTableFromStore('socialmedia')
     plotSocialMedia(socialm)

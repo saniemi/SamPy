@@ -98,7 +98,7 @@ def _get_path(service, profile_id):
     """
     print('Retrieving navigation path data...')
     return service.data().ga().get(ids='ga:' + profile_id,
-                                   start_date='180daysAgo',
+                                   start_date='712daysAgo',
                                    end_date='today',
                                    metrics='ga:sessions, ga:bounces',
                                    dimensions='ga:landingpagepath, ga:exitpagepath',
@@ -116,7 +116,7 @@ def _get_location(service, profile_id):
     """
     print('Retrieving location information...')
     return service.data().ga().get(ids='ga:' + profile_id,
-                                   start_date='180daysAgo',
+                                   start_date='712daysAgo',
                                    end_date='yesterday',
                                    metrics='ga:sessions,ga:bounces,ga:sessionDuration,ga:bounceRate,ga:avgSessionDuration',
                                    dimensions='ga:city, ga:latitude, ga:longitude',
@@ -134,7 +134,7 @@ def _get_browser(service, profile_id):
     """
     print('Retrieving browser information...')
     return service.data().ga().get(ids='ga:' + profile_id,
-                                   start_date='356daysAgo',
+                                   start_date='712daysAgo',
                                    end_date='yesterday',
                                    metrics='ga:sessions,ga:bounces,ga:sessionDuration,ga:bounceRate,ga:avgSessionDuration',
                                    dimensions='ga:browser',
@@ -152,7 +152,7 @@ def _get_social_media(service, profile_id):
     """
     print('Retrieving social media information...')
     return service.data().ga().get(ids='ga:' + profile_id,
-                                   start_date='356daysAgo',
+                                   start_date='712daysAgo',
                                    end_date='yesterday',
                                    metrics='ga:sessionDuration,ga:bounceRate,ga:avgSessionDuration,ga:goalCompletionsAll,ga:avgTimeOnPage,ga:goal10Starts',
                                    dimensions='ga:userType,ga:socialNetwork',
@@ -170,12 +170,11 @@ def _get_users(service, profile_id):
     """
     print('Retrieving user information...')
     return service.data().ga().get(ids='ga:' + profile_id,
-                                   start_date='356daysAgo',
+                                   start_date='712daysAgo',
                                    end_date='yesterday',
-                                   metrics='ga:bounceRate,ga:goalCompletionsAll,ga:goal10Starts,ga:sessions,ga:avgSessionDuration,ga:goalStartsAll,ga:goalValueAll,ga:goalValuePerSession,ga:goalAbandonRateAll',
-                                   dimensions='ga:userType,ga:socialNetwork,ga:userAgeBracket,ga:userGender,ga:source,ga:yearMonth,ga:deviceCategory',
+                                   metrics='ga:bounces,ga:bounceRate,ga:goalCompletionsAll,ga:goal10Starts,ga:sessions,ga:avgSessionDuration,ga:goalStartsAll,ga:goalValueAll,ga:goalValuePerSession,ga:goalAbandonRateAll',
+                                   dimensions='ga:userType,ga:socialNetwork,ga:userAgeBracket,ga:userGender,ga:source,ga:date,ga:deviceCategory',
                                    max_results=10000).execute()
-
 
 
 def _get_sessions(service, profile_id):
@@ -208,7 +207,7 @@ def _get_OS(service, profile_id):
     """
     print('Retrieving OS information...')
     return service.data().ga().get(ids='ga:' + profile_id,
-                                   start_date='180daysAgo',
+                                   start_date='712daysAgo',
                                    end_date='yesterday',
                                    metrics='ga:sessions,ga:bounces,ga:sessionDuration,ga:bounceRate,ga:avgSessionDuration',
                                    dimensions='ga:operatingSystem',
@@ -261,8 +260,8 @@ def get_data():
     # get data
     # path = _get_path(service, profile)
     # city = _get_location(service, profile)
-    # browser = _get_browser(service, profile)
-    # os = _get_OS(service, profile)
+    browser = _get_browser(service, profile)
+    os = _get_OS(service, profile)
     sessions = _get_sessions(service, profile)
     socialm = _get_social_media(service, profile)
     users = _get_users(service, profile)
@@ -270,11 +269,11 @@ def get_data():
     # convert to pandas and store
     # city = convertToPandas(city, store, outputname='location')
     # path = convertToPandas(path, store, outputname='path')
-    # browser = convertToPandas(browser, store, outputname='browser')
-    # os = convertToPandas(os, store, outputname='os')
+    browser = convertToPandas(browser, store, outputname='browser')
+    os = convertToPandas(os, store, outputname='os')
     sessions = convertToPandas(sessions, store, outputname='sessions')
     socialm = convertToPandas(socialm, store, outputname='socialmedia')
-    users = convertToPandas(users, users, outputname='socialmedia')
+    users = convertToPandas(users, store, outputname='users')
 
     store.close()
 

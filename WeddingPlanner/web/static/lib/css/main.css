@@ -7,11 +7,11 @@
     color: #000000;
 }
 .navbar-default .navbar-backgrnd {
-    color: #0000FF;
+    color: #1034A6;
 }
 
 .navbar-default {
-    background-color: #0000FF;
+    background-color: #1034A6;
 }
 
 
@@ -51,10 +51,11 @@
 .container-fluid {
   padding-left:  30px;
   padding-right: 30px;
+  padding-bottom: 0px;
 }
 
 .pie-chart {
-  height: 150px;
+  height: 220px;
 }
 
 .dc-chart .axis text{

@@ -56,11 +56,6 @@
     </div>
 
     <div class="col-md-2 pie-chart">
-      <h4>Social Network <small><a id="network">reset</a></small></h4>
-      <div class="dc-chart" id="chart-network" ></div>
-    </div>
-
-    <div class="col-md-2 pie-chart">
       <h4>Age <small><a id="age">reset</a></small></h4>
       <div class="dc-chart" id="chart-age" ></div>
     </div>
@@ -71,23 +66,63 @@
     </div>
 
     <div class="col-md-2 pie-chart">
-      <h4>Month of Year <small><a id="year">reset</a></small></h4>
-      <div class="dc-chart" id="chart-year" ></div>
+      <h4>Device Category <small><a id="device">reset</a></small></h4>
+      <div class="dc-chart" id="chart-device" ></div>
     </div>
 
   </div>
+
+   <div class="row">
+
+    <div class="col-md-12">
+        <h4>Sessions and Bounces</h4>
+        <div class="dc-chart" id="time-chart" ></div>
+    </div>
+
+  </div>
+
+   <div class="row">
+
+    <div class="col-md-2">
+      <h4>Goal Starts <small><a id="start">reset</a></small></h4>
+      <div class="dc-chart" id="start-chart"></div>
+    </div>
+
+    <div class="col-md-2">
+      <h4>Goal 10 Starts <small><a id="start10">reset</a></small></h4>
+      <div class="dc-chart" id="start10-chart"></div>
+    </div>
+
+    <div class="col-md-2">
+      <h4>Goal Completions <small><a id="completion">reset</a></small></h4>
+      <div class="dc-chart" id="completion-chart"></div>
+    </div>
+
+    <div class="col-md-2">
+      <h4>Goal Abandon Rate <small><a id="abandon">reset</a></small></h4>
+      <div class="dc-chart" id="abandon-chart"></div>
+    </div>
+
+     <div class="col-md-2">
+      <h4>Mean Duration <small><a id="duration">reset</a></small></h4>
+      <div class="dc-chart" id="duration-chart"></div>
+    </div>
+
+  </div>
+
 
   <div class="row">
     <div class="col-xs-12">
       <table class="table table-bordered table-striped" id="data-table">
         <thead>
           <tr class="header">
-            <th>A</th>
-            <th>B</th>
-            <th>C</th>
-            <th>D</th>
-            <th>E</th>
-            <th>F</th>
+            <th>User Type</th>
+            <th>Source</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Bounce Rate</th>
+            <th>Goal Completions</th>
+            <th>Mean Duration</th>
           </tr>
         </thead>
       </table>
@@ -105,7 +140,7 @@
   <script src="./static/lib/js/queue.js"></script>
   <script src="./static/lib/js/keen.min.js"></script>
   <script src="./static/lib/js/underscore-min.js" type="text/javascript" ></script>
-  <script src='./static/js/sessions.js' type='text/javascript'></script>
+  <script src='./static/js/users.js' type='text/javascript'></script>
 
 
 </body>
