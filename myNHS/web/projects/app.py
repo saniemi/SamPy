@@ -11,6 +11,7 @@ Requirements
 :requires: Flask
 :requires: pandas
 :requires: sqlalchemy
+:requires: MetOffer
 
 
 Author
@@ -31,11 +32,13 @@ from flask import render_template
 from flask_compress import Compress
 from flask_cache import Cache
 from sqlalchemy import create_engine
+import metoffer
+import json
 
 
 app = Flask(__name__)
-Compress(app)
-cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+#Compress(app)
+#cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 
 def QueryDB(sql, location='sqlite:////Users/saminiemi/Projects/myNHS/data/myNHS.db'):
@@ -180,6 +183,23 @@ def waitTimeData():
     data = data.to_json(orient='records')
 
     return data
+
+
+@app.route("/myNHS/latestImages")
+def latestImagesData():
+    M = metoffer.MetOffer('7e2ecd8b-e840-4d06-8eba-5b48ff725cb0')
+    data = M.map_overlay_obs()
+
+    for x in data['Layers']['Layer']:
+        if x['@displayName'] == 'Lightning':
+            latestLightning = x['Service']['Times']['Time'][0]
+        if x['@displayName'] == 'Rainfall':
+            latestRainfall = x['Service']['Times']['Time'][0]
+
+    data = {'Lightning': latestLightning, 'Rainfall': latestRainfall}
+    jsonarray = json.dumps(data)
+
+    return jsonarray
 
 
 if __name__ == "__main__":
