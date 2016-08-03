@@ -172,12 +172,40 @@ def plotBrowsers(df):
     plt.close()
 
 
+def weekdayNumbering(row, column='DayofWeekName'):
+    days = {'Monday':0, 'Tuesday':1, 'Wednesday':2, 'Thursday':3, 'Friday':4, 'Saturday':5, 'Sunday':6}
+    for key in days:
+        if row[column] == key:
+            return days[key]
+
+
+def plotWeekdayData(file='weekdayData.txt'):
+    data = pd.read_csv(file, sep='\t', thousands=',')
+    data['daynumb'] = data.apply(lambda row: weekdayNumbering(row), axis=1)
+    data.sort_values(by='daynumb', inplace=True)
+
+    #normalise the session values
+    data['Sessions'] /= data['Sessions'].max()
+
+    g = sns.barplot(x='DayofWeekName', y='Sessions', data=data)
+    g.set(ylabel='Normalised Number of Sessions', xlabel='')
+    plt.savefig('weekdaySessions.png')
+    plt.close()
+
+    g = sns.barplot(x='DayofWeekName', y='AvgSessionDuration', data=data)
+    g.set(ylabel='Average Session Duration [s]', xlabel='')
+    plt.savefig('weekdayDurations.png')
+    plt.close()
+
+
 if __name__ == '__main__':
-    sessions = getTableFromStore('sessions')
-    plotSessions(sessions)
+    # sessions = getTableFromStore('sessions')
+    # plotSessions(sessions)
+    #
+    # browsers = getTableFromStore('browser')
+    # plotBrowsers(browsers)
+    #
+    # socialm = getTableFromStore('socialmedia')
+    # plotSocialMedia(socialm)
 
-    browsers = getTableFromStore('browser')
-    plotBrowsers(browsers)
-
-    socialm = getTableFromStore('socialmedia')
-    plotSocialMedia(socialm)
+    plotWeekdayData()
