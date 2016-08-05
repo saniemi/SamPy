@@ -11,7 +11,7 @@ Requirements
 :requires: Flask
 :requires: pandas
 :requires: sqlalchemy
-:requires: MetOffer
+:requires: MetOffer (only if using Met Office data, currently disabled)
 
 
 Author
@@ -23,17 +23,17 @@ Author
 Version
 -------
 
-:version: 0.2
-:date: 25-Jul-2016
+:version: 0.3
+:date: 05-Aug-2016
 """
 import pandas as pd
+from sqlalchemy import create_engine
 from flask import Flask
 from flask import render_template
-from flask_compress import Compress
-from flask_cache import Cache
-from sqlalchemy import create_engine
-import metoffer
-import json
+# from flask_compress import Compress
+# from flask_cache import Cache
+# import metoffer
+# import json
 
 
 app = Flask(__name__)
@@ -185,21 +185,21 @@ def waitTimeData():
     return data
 
 
-@app.route("/myNHS/latestImages")
-def latestImagesData():
-    M = metoffer.MetOffer('7e2ecd8b-e840-4d06-8eba-5b48ff725cb0')
-    data = M.map_overlay_obs()
-
-    for x in data['Layers']['Layer']:
-        if x['@displayName'] == 'Lightning':
-            latestLightning = x['Service']['Times']['Time'][0]
-        if x['@displayName'] == 'Rainfall':
-            latestRainfall = x['Service']['Times']['Time'][0]
-
-    data = {'Lightning': latestLightning, 'Rainfall': latestRainfall}
-    jsonarray = json.dumps(data)
-
-    return jsonarray
+# @app.route("/myNHS/latestImages")
+# def latestImagesData():
+#     M = metoffer.MetOffer('7e2ecd8b-e840-4d06-8eba-5b48ff725cb0')
+#     data = M.map_overlay_obs()
+#
+#     for x in data['Layers']['Layer']:
+#         if x['@displayName'] == 'Lightning':
+#             latestLightning = x['Service']['Times']['Time'][0]
+#         if x['@displayName'] == 'Rainfall':
+#             latestRainfall = x['Service']['Times']['Time'][0]
+#
+#     data = {'Lightning': latestLightning, 'Rainfall': latestRainfall}
+#     jsonarray = json.dumps(data)
+#
+#     return jsonarray
 
 
 if __name__ == "__main__":
